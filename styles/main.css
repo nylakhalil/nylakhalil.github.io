@@ -1,0 +1,22 @@
+html, body { 
+    background-image: linear-gradient(to bottom, #ffffff, #bccbde ) !important; 
+}
+
+header {
+    height: 50vh;
+    opacity: .90;
+    color: lightyellow;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    background-size: cover;
+    background: url("../images/header_background.jpg") no-repeat center center;
+}
+
+.icon-section {
+    padding-top: 4vh;
+    padding-bottom: 2vh;
+}
+
+i.fab {
+    color: black;
+}
