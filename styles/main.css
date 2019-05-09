@@ -1,22 +1,31 @@
-html, body { 
-    background-image: linear-gradient(to bottom, #ffffff, #bccbde ) !important; 
+html, body, footer { 
+    background: #161616 0% !important;
 }
 
 header {
     height: 50vh;
-    opacity: .90;
-    color: lightyellow;
+    opacity: 90;
     padding-top: 8rem;
     padding-bottom: 8rem;
     background-size: cover;
     background: url("../images/header_background.jpg") no-repeat center center;
 }
 
+.fab-icon {
+    height: 3rem;
+    width: 3rem;
+    line-height: 3rem;
+    border-radius: 100%;
+    color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+}
+
 .icon-section {
     padding-top: 4vh;
     padding-bottom: 2vh;
+    color:  rgba(255, 255, 255, .5) !important;
 }
 
-i.fab {
-    color: black;
+.about-section {
+    padding-top: 10rem;
 }
