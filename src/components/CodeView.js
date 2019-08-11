@@ -51,10 +51,10 @@ class CodeView extends Component {
     getCol(item) {
         return (
             <Col key={item.title}>
-                <a href={"#" + item.title} className="icon-circle" onClick={this.setContent.bind(this, item.title)}>
+                <span className="cursor-pointer icon-circle" onClick={this.setContent.bind(this, item.title)}>
                     <FontAwesomeIcon icon={item.icon} color="black" />
-                </a>
-                <p class="h4" className="p-1 text-capitalize">{item.title}</p>
+                </span>
+                <p className="h4 p-1 text-capitalize">{item.title}</p>
             </Col>
         )
     }

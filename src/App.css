@@ -9,6 +9,10 @@
     min-height: 40vh;
 }
 
+.cursor-pointer { 
+  cursor: pointer; 
+}
+
 .word-cloud {
   min-width: 200px;
   min-height: 200px;

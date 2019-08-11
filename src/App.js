@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { HashRouter, Route } from 'react-router-dom'
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -13,12 +13,12 @@ function App() {
   return (
     <div id="app">
       <Header />
-        <div >
-          <Switch>
-              <Route exact path="/" component={HomeView} />
-              <Route exact path="/code" component={CodeView} />
-              <Route exact path="/photography" component={PhotoView} />
-          </Switch>
+        <div>
+            <HashRouter basename={process.env.PUBLIC_URL}>
+                <Route exact path='/' component={HomeView} />
+                <Route path='/code' component={CodeView} />
+                <Route path='/photography' component={PhotoView} />
+            </HashRouter>
         </div>
       <Footer />
     </div>

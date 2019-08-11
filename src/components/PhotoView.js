@@ -33,7 +33,7 @@ class PhotoView extends Component {
                <Carousel className="w-100 h-100 mx-auto" interval={interval} indicators={true} controls={false}>
                     {images.map(image => (
                     <Carousel.Item key={image.key}>
-                        <img className="d-block w-50 mx-auto" src={image.url} alt={image.title} />
+                        <img className="d-block mx-auto" src={image.url} alt={image.title} />
                         <Carousel.Caption>
                             <small>{image.title}</small>
                         </Carousel.Caption>
