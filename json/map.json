@@ -1,0 +1,35 @@
+{
+    "center": [38.9589993, -77.3569298],
+    "zoom": 12,
+    "baselayers": [
+        {
+            "id": "osm-mk",
+            "on": "true",
+            "name": "OSM Mapnik",
+            "url": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            "attribution": "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+        },
+        {
+            "id": "osm-bw",
+            "on": "false",
+            "name": "OSM Black & White",
+            "url": "https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png",
+            "attribution": "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+        }
+    ],
+    "markers": [
+        {
+            "id": "dc-center",
+            "icon": "map-pin",
+            "position": [38.889931, -77.009003],
+            "text": "Washington, D.C."
+        },
+        {
+            "id": "reston-center",
+            "icon": "map-pin",
+            "position": [38.955144, -77.355550],
+            "text": "Reston"
+        }
+    ]
+
+}
