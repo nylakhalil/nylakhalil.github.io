@@ -1,0 +1,151 @@
+{
+    "design": [
+            {
+                "text": "requirements",
+                "value": "1"
+            },
+            {
+                "text": "analysis",
+                "value": "1"
+            },
+            {
+                "text": "specifications",
+                "value": "1"
+            },
+            {
+                "text": "integration",
+                "value": "1"
+            },
+            {
+                "text": "modular",
+                "value": "1"
+            },
+            {
+                "text": "secure",
+                "value": "1"
+            },
+            {
+                "text": "scalable",
+                "value": "1"
+            },
+            {
+                "text": "SOA",
+                "value": "1"
+            },
+            {
+                "text": "Microservices",
+                "value": "1"
+            }
+    ],
+    "develop": [
+            {
+                "text": "Java",
+                "value": "1"
+            },
+            {
+                "text": "Angular",
+                "value": "1"
+            },
+            {
+                "text": "React",
+                "value": "1"
+            },
+            {
+                "text": "Python",
+                "value": "1"
+            },
+            {
+                "text": "Bootstrap",
+                "value": "1"
+            },
+            {
+                "text": "Material Design",
+                "value": "1"
+            },
+            {
+                "text": "HTML",
+                "value": "1"
+            },
+            {
+                "text": "CSS",
+                "value": "1"
+            },
+            {
+                "text": "REST",
+                "value": "1"
+            },
+            {
+                "text": "JSON",
+                "value": "1"
+            },
+            {
+                "text": "XML",
+                "value": "1"
+            },
+            {
+                "text": "Git",
+                "value": "1"
+            }
+    ],
+    "test": [
+        {
+            "text": "JUnit",
+            "value": "1"
+        },
+        {
+            "text": "Jest",
+            "value": "1"
+        },
+        {
+            "text": "Karma",
+            "value": "1"
+        },
+        {
+            "text": "TDD",
+            "value": "1"
+        },
+        {
+            "text": "User Acceptance Testing",
+            "value": "1"
+        },
+        {
+            "text": "Integration Testing",
+            "value": "1"
+        },
+        {
+            "text": "Functional Testing",
+            "value": "1"
+        }
+        
+    ],
+     "deploy": [
+        {
+            "text": "Cloud",
+            "value": "1"
+        },
+        {
+            "text": "Web Server",
+            "value": "1"
+        },
+        {
+            "text": "AWS",
+            "value": "1"
+        },
+        {
+            "text": "Release",
+            "value": "1"
+        },
+        {
+            "text": "DevOps",
+            "value": "1"
+        },
+        {
+            "text": "Jenkins",
+            "value": "1"
+        },
+        {
+            "text": "CI/CD",
+            "value": "1"
+        }
+    ]
+}
