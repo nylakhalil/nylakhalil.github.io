@@ -18,8 +18,14 @@ export default class MapView extends React.Component {
         center: [38.889931, -77.009003],
         baselayers: [],
         markers: []
-      }
+      },
+      latlng: null
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e){
+    this.setState({ latlng: e.latlng });
   }
 
   componentDidMount() {
@@ -63,11 +69,16 @@ export default class MapView extends React.Component {
 
   render() {
     return (
-        <Map center={this.state.data.center} zoom={this.state.data.zoom}>
+        <Map center={this.state.data.center} zoom={this.state.data.zoom} onClick={this.handleClick}>
           <LayersControl position="topright">
             {this.state.data.baselayers.map(layer => this.getBaselayers(layer))}
           </LayersControl>
           {this.state.data.markers.map(marker => this.getMarkers(marker))}
+
+          { this.state.latlng && 
+          <Marker position={this.state.latlng} icon={this.getMarkerIcon('map-marker')} draggable={true}>
+              <Popup>{JSON.stringify(this.state.latlng)}</Popup>
+          </Marker>}
         </Map>
     )
   }

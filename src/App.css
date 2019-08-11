@@ -6,7 +6,7 @@
 .leaflet-container {
     height: 100%;
     width: 100%;
-    min-height: 40vh;
+    min-height: 60vh;
 }
 
 .cursor-pointer { 
@@ -23,7 +23,7 @@
 .icon-circle {
     padding: .5em;
     border-radius: 100%;
-    background: darkgray;
+    background: LightGray;
 }
 
 @keyframes App-logo-spin {

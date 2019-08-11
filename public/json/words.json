@@ -1,31 +1,31 @@
 {
     "design": [
             {
-                "text": "requirements",
+                "text": "Requirements",
                 "value": "1"
             },
             {
-                "text": "analysis",
+                "text": "Analysis",
                 "value": "1"
             },
             {
-                "text": "specifications",
+                "text": "Specifications",
                 "value": "1"
             },
             {
-                "text": "integration",
+                "text": "Integration",
                 "value": "1"
             },
             {
-                "text": "modular",
+                "text": "Modular",
                 "value": "1"
             },
             {
-                "text": "secure",
+                "text": "Secure",
                 "value": "1"
             },
             {
-                "text": "scalable",
+                "text": "Scalable",
                 "value": "1"
             },
             {

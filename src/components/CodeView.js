@@ -43,9 +43,9 @@ class CodeView extends Component {
 
     componentDidMount() {
         fetch(DATA_ENDPOINT)
-          .then(response => { return response.json() })
-          .then(data =>  this.setState({words: data}) )
-          .catch(error => console.error('Error: ', error));
+            .then(response => { return response.json() })
+            .then(data =>  this.setState({words: data}) )
+            .catch(error => console.error('Error: ', error));
       }
 
     getCol(item) {
@@ -59,14 +59,14 @@ class CodeView extends Component {
         )
     }
 
-    getWorldCloud(title) { 
-        if (title === undefined || Object.keys(this.state.words).length === 0) {
+    getWorldCloud(title, words, options) { 
+        if (title === undefined || Object.keys(words).length === 0) {
             return null;
         }
-        const words = this.state.words[title];
+
         return (
             <div className="word-cloud">
-              <ReactWordcloud options={this.state.options} words={words} />
+              <ReactWordcloud options={options} words={words[title]} />
             </div>
         );
     }
@@ -85,7 +85,7 @@ class CodeView extends Component {
                 </Row>
 
                 <div id="#content" className={this.state.content ? 'visible d-flex justify-content-center' : 'invisible'}>
-                    {this.getWorldCloud(this.state.content)}
+                    {this.getWorldCloud(this.state.content, this.state.words, this.state.options)}
                 </div>
             </div>
         );
