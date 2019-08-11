@@ -10,16 +10,16 @@ class Footer extends Component {
         return (
             <footer className="fixed-bottom">
                 <Row className="justify-content-md-center">
-                    <Col>
+                    <Col className="pt-1">
                         <ul className="list-unstyled list-inline mb-1">
                             <li className="list-inline-item">
                                 <a href="https://github.com/nylakhalil">
-                                    <FontAwesomeIcon icon={faGithub} color="black" />
+                                    <FontAwesomeIcon icon={faGithub} color="Black" />
                                 </a>
                             </li>
                             <li className="list-inline-item">
                                 <a href="https://www.linkedin.com/in/nylakhalil/">
-                                    <FontAwesomeIcon icon={faLinkedin} color="black" />
+                                    <FontAwesomeIcon icon={faLinkedin} color="Black" />
                                 </a>
                             </li>
                         </ul>

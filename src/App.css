@@ -9,6 +9,10 @@
     min-height: 60vh;
 }
 
+.image-container { 
+  background-color: black;
+}
+
 .cursor-pointer { 
   cursor: pointer; 
 }
