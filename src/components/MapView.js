@@ -67,6 +67,12 @@ export default class MapView extends React.Component {
     }
   }
 
+  parseLatLng(latlng) {
+    return (
+       latlng.lat + ", " + latlng.lng
+    )
+  }
+
   render() {
     return (
         <Map center={this.state.data.center} zoom={this.state.data.zoom} onClick={this.handleClick}>
@@ -77,7 +83,7 @@ export default class MapView extends React.Component {
 
           { this.state.latlng && 
           <Marker position={this.state.latlng} icon={this.getMarkerIcon('map-marker')} draggable={true}>
-              <Popup>{JSON.stringify(this.state.latlng)}</Popup>
+              <Popup>{this.parseLatLng(this.state.latlng)}</Popup>
           </Marker>}
         </Map>
     )
