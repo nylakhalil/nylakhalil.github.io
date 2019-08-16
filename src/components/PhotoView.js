@@ -29,11 +29,11 @@ class PhotoView extends Component {
 
     getCarousel(images, interval) {
        return (
-           <div className="image-container">
-               <Carousel className="w-100 h-100 mx-auto" interval={interval} indicators={true} controls={false}>
+           <div id="photo-view">
+               <Carousel interval={interval} indicators={true} controls={false} slide={false} fade={true}>
                     {images.map(image => (
-                    <Carousel.Item key={image.key}>
-                        <img className="d-block mx-auto img-fluid" src={image.url} alt={image.title} />
+                    <Carousel.Item className="w-100 h-100" key={image.key}>
+                        <img src={image.url} alt={image.title} />
                         <Carousel.Caption>
                             <small>{image.title}</small>
                         </Carousel.Caption>

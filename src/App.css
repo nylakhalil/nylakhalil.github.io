@@ -17,12 +17,17 @@
     min-height: 50vh;
 }
 
-.carousel-item {
-  height: calc(100vh - 120px) !important;
-}
-.image-container { 
+#photo-view {
   background-color: black;
-  height: calc(100vh - 120px) !important;
+}
+
+.carousel-inner {
+  height: calc(100vh - 120px) !important
+}
+
+.carousel-item.active {
+  display: flex;
+  justify-content: center;
 }
 
 .cursor-pointer { 
