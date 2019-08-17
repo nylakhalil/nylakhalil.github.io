@@ -1,9 +1,5 @@
-#header {
-  height: 60px;
-}
-
 #main {
-  height: calc(100vh - 120px) !important;
+  height: 100vh !important;
 }
 
 #footer {
@@ -22,7 +18,7 @@
 }
 
 .carousel-inner {
-  height: calc(100vh - 120px) !important
+  height: 100vh !important
 }
 
 .carousel-item.active {
