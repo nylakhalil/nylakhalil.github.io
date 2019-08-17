@@ -8,12 +8,12 @@ class Footer extends Component {
         return (
             <footer id="footer" className="d-flex justify-content-between p-4">
                 <ul className="list-unstyled list-inline mb-1">
-                    <li className="list-inline-item">
+                    <li className="list-inline-item footer-icons">
                         <a href="https://github.com/nylakhalil">
                             <FontAwesomeIcon icon={faGithub} color="Black" />
                         </a>
                     </li>
-                    <li className="list-inline-item">
+                    <li className="list-inline-item footer-icons">
                         <a href="https://www.linkedin.com/in/nylakhalil/">
                             <FontAwesomeIcon icon={faLinkedin} color="Black" />
                         </a>

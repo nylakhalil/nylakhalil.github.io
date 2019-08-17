@@ -6,8 +6,8 @@ class Header extends Component {
 
     render() {
         return (
-            <header>
-                <Navbar collapseOnSelect expand="lg" bg="light">
+            <header id="header">
+                <Navbar collapseOnSelect expand="lg">
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <Nav>

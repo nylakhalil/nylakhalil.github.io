@@ -1,11 +1,17 @@
+#header {
+  background-color: transparent !important;
+}
+
 #main {
   height: 100vh !important;
 }
 
 #footer {
   height: 60px !important;
-  background: #f8f9fa 0% !important; /*#E3E2DF */
+  background-color: transparent !important;
 }
+
+
 
 .leaflet-container {
     height: 100%;
@@ -41,8 +47,4 @@
     padding: .5em;
     border-radius: 100%;
     background: LightGray;
-}
-
-.footer-icons {
-  margin-right: 36%;
 }
