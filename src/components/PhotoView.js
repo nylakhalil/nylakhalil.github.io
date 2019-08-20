@@ -32,7 +32,7 @@ class PhotoView extends Component {
            <div id="photo-view">
                <Carousel interval={interval} indicators={true} controls={false} slide={false} fade={true}>
                     {images.map(image => (
-                    <Carousel.Item className="w-100 h-100" key={image.key}>
+                    <Carousel.Item key={image.key}>
                         <img className="img-fluid" src={image.url} alt={image.title} />
                         <Carousel.Caption>
                             <small><a href={image.link} className="text-light">{image.title}</a></small>
