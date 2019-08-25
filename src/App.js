@@ -16,11 +16,11 @@ function App() {
             <main id="main">
                 <HashRouter basename={process.env.PUBLIC_URL}>
                     <Route exact path='/' component={HomeView} />
-                    <Route path='/code' component={CodeView} />
+                    <Route path='/develop' component={CodeView} />
                     <Route path='/photography' component={PhotoView} />
                 </HashRouter>
+                <Footer />
             </main>
-            <Footer />
         </div>
     );
 }

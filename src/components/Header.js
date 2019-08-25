@@ -12,7 +12,7 @@ class Header extends Component {
                     <Navbar.Collapse className="justify-content-end">
                         <Nav>
                             <Nav.Link eventKey={1} href="/#">About</Nav.Link>
-                            <Nav.Link eventKey={2} href="/#/code">Develop</Nav.Link>
+                            <Nav.Link eventKey={2} href="/#/develop">Develop</Nav.Link>
                             <Nav.Link eventKey={3} href="/#/photography">Photograpy</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

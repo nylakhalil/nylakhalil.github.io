@@ -13,26 +13,23 @@ class CodeView extends Component {
         super(props);
     
         this.state = {
-            data: {
-                title: "",
-                content: "",
-                icons: [
-                    { "title": "design", "icon": faObjectGroup },
-                    { "title": "develop", "icon": faCode },
-                    { "title": "test", "icon": faShieldAlt },
-                    { "title": "deploy", "icon": faCubes },
-                ]
-            },
-            words: {},
+            icons: [
+                { name: "design", color: "SeaGreen", "icon": faObjectGroup },
+                { name: "develop", color: "Black", "icon": faCode },
+                { name: "test", color: "Black", "icon": faShieldAlt },
+                { name: "deploy", color: "Black", "icon": faCubes },
+            ],
+            content: {},
+            title: "",
             options: {
-                colors: ['PLUM', 'LIGHTSTEELBLUE', 'YELLOWGREEN', 'LIGHTSALMON'],
+                colors: ['#B5BABE'],
                 enableTooltip: false,
                 fontFamily: 'impact',
-                fontSizes: [5, 60],
+                fontSizes: [5, 40],
                 fontStyle: 'normal',
                 fontWeight: 'normal',
-                padding: 1,
-                rotations: 3,
+                padding: 10,
+                rotations: 1,
                 rotationAngles: [0, 90],
                 scale: 'sqrt',
                 spiral: 'archimedean',
@@ -44,49 +41,85 @@ class CodeView extends Component {
     componentDidMount() {
         fetch(DATA_ENDPOINT)
             .then(response => { return response.json() })
-            .then(data =>  this.setState({words: data}) )
+            .then(data =>  this.setState({content: data}) )
             .catch(error => console.error('Error: ', error));
-      }
-
-    getCol(item) {
-        return (
-            <Col key={item.title}>
-                <span className="cursor-pointer icon-circle" onClick={this.setContent.bind(this, item.title)}>
-                    <FontAwesomeIcon icon={item.icon} color="black" />
-                </span>
-                <p className="h4 p-1 text-capitalize">{item.title}</p>
-            </Col>
-        )
     }
 
-    getWorldCloud(title, words, options) { 
-        if (title === undefined || Object.keys(words).length === 0) {
+    handleClick(title) {
+        this.setState({ title: title });
+        this.state.icons.map(icon => {
+            if (icon.name === title) {
+                icon.color = "SeaGreen"
+            } else {
+                icon.color = "Black"
+            }
+        });
+    }
+
+    getIconCol(item) {
+        return (
+            <Col className="text-center" key={item.name}>
+                <span className="cursor-pointer icon-circle" onClick={this.handleClick.bind(this, item.name)} title={item.name}>
+                    <FontAwesomeIcon icon={item.icon} color={item.color}/>
+                </span>
+                <p className="h4 p-1 text-capitalize">{item.name}</p>
+            </Col>
+        );
+    }
+
+    getWorldCloud(words, options) { 
+        if (!words || Object.keys(words).length === 0) {
             return null;
         }
 
         return (
-            <div className="word-cloud">
-              <ReactWordcloud options={options} words={words[title]} />
-            </div>
+            <ReactWordcloud options={options} words={words} />
         );
     }
-    
-    setContent(title) {
-        this.setState({
-            content: title
-        });
+
+    getDescription(description) {
+        return (
+            <blockquote className="mr-5 blockquote pl-4 pt-4">
+                <p className="text-muted">
+                    {description['content']}
+                </p>
+                <footer className="blockquote-footer text-center">
+                    <small className="text-muted mr-5">
+                        <a href={description['link']}>
+                            <cite title="Source Link">
+                                {description['source']}
+                            </cite>
+                        </a>
+                    </small>
+                </footer>
+            </blockquote>
+        );
     }
 
     render() {
-        return (
-            <div className="container text-center flex-grow-1 p-5">
-                <Row>
-                    {this.state.data.icons.map(icon => this.getCol(icon))}
-                </Row>
+        if (!this.state.content || Object.keys(this.state.content).length === 0) {
+            return null;
+        }
+        const title = this.state.title ||  "design";
 
-                <div id="#content" className={this.state.content ? 'visible d-flex justify-content-center' : 'invisible'}>
-                    {this.getWorldCloud(this.state.content, this.state.words, this.state.options)}
-                </div>
+        return (
+            <div className="d-block p-5">
+                <Row className="p-3 d-flex justify-content-between" noGutters={true}>
+                    {this.state.icons.map(icon => this.getIconCol(icon))}
+                </Row>
+                <Row className="align-self-start" noGutters={true}>
+                    <Col className="bg-light">
+                        {this.getWorldCloud(this.state.content[title]["words"], this.state.options)}
+                    </Col>
+                    <Col className="d-none d-lg-block"></Col> 
+                </Row>
+                <Row className="align-self-end" noGutters={true}>
+                    <Col className="d-none d-lg-block"></Col>
+                    <Col className="bg-light">
+                        {this.getDescription(this.state.content[title])}
+                    </Col>
+                </Row>
+                <p></p>
             </div>
         );
     }
