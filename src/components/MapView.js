@@ -1,6 +1,7 @@
-import React from 'react'
-import { Map, LayersControl, TileLayer, Marker, Popup } from 'react-leaflet'
-import L from 'leaflet'
+import React from 'react';
+import ReactGA from 'react-ga';
+import { Map, LayersControl, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 
 import 'leaflet/dist/leaflet.css'
 
@@ -19,13 +20,10 @@ export default class MapView extends React.Component {
         baselayers: [],
         markers: []
       },
-      latlng: null
+      latlng: null,
+      popupMsg: ''
     };
     this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e){
-    this.setState({ latlng: e.latlng });
   }
 
   componentDidMount() {
@@ -67,10 +65,25 @@ export default class MapView extends React.Component {
     }
   }
 
+  handleClick(e) {
+    const location = this.parseLatLng(e.latlng);
+    this.setState({ latlng: e.latlng, popupMsg: location});
+    
+    ReactGA.event({ 
+        category: 'Map Page',
+        action: 'Selected Marker Location',
+        label: 'Interaction'
+    });
+  }
+
   parseLatLng(latlng) {
-    return (
-       latlng.lat + ", " + latlng.lng
-    )
+       if (!latlng) {
+        return 'Marker Location Error';
+      }
+
+      const lat = latlng['lat'].toFixed(5); 
+      const lng = latlng['lng'].toFixed(5);
+      return 'LatLng: ' + lat + ', ' + lng;
   }
 
   render() {
@@ -83,7 +96,7 @@ export default class MapView extends React.Component {
 
           { this.state.latlng && 
           <Marker position={this.state.latlng} icon={this.getMarkerIcon('map-marker')} draggable={true}>
-              <Popup>{this.parseLatLng(this.state.latlng)}</Popup>
+              <Popup>{this.state.popupMsg}</Popup>
           </Marker>}
         </Map>
     )

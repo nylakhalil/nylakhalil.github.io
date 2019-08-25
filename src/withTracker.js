@@ -8,7 +8,11 @@ import ReactGA from 'react-ga';
 if (process.env.NODE_ENV === "production") {
     ReactGA.initialize('UA-140687992-1');
 } else {
-    ReactGA.initialize('UA-140687992-1', { debug: true });
+    /* NylaKhalil added - disable send in non-prod env: 
+    https://developers.google.com/analytics/devguides/collection/analyticsjs/debugging */
+    ReactGA.initialize('UA-140687992-1', { debug: false });
+    var ga = ReactGA.ga();
+    ga('set', 'sendHitTask', null); 
 }
 
 export const withTracker = (WrappedComponent, options = {}) => {

@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import Carousel from 'react-bootstrap/Carousel'
+import React, { Component } from 'react';
+import ReactGA from 'react-ga';
+import Carousel from 'react-bootstrap/Carousel';
 
-const DATA_ENDPOINT = '/json/photos.json'
+const DATA_ENDPOINT = '/json/photos.json';
 
 class PhotoView extends Component {
 
@@ -27,6 +28,14 @@ class PhotoView extends Component {
             ).catch(error => console.error('Error: ', error));
     }
 
+    handleClick(title) {
+        ReactGA.event({ 
+            category: 'Photography Page',
+            action: 'Selected Image: ' + title,
+            label: 'Navigation'
+        });
+    }
+
     getCarousel(images, interval) {
        return (
            <div id="photo-view">
@@ -34,8 +43,10 @@ class PhotoView extends Component {
                     {images.map(image => (
                     <Carousel.Item key={image.key}>
                         <img className="img-fluid" src={image.url} alt={image.title} />
-                        <Carousel.Caption>
-                            <small><a href={image.link} className="text-light">{image.title}</a></small>
+                        <Carousel.Caption onClick={this.handleClick.bind(this, image.title)}>
+                            <a href={image.link} className="text-light">
+                                <small>{image.title}</small>
+                            </a>
                         </Carousel.Caption>
                     </Carousel.Item>
                     ))}

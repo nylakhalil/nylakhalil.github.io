@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import ReactWordcloud from 'react-wordcloud'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faObjectGroup, faCode, faCubes, faShieldAlt } from '@fortawesome/free-solid-svg-icons'
+import React, { Component } from 'react';
+import ReactGA from 'react-ga';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ReactWordcloud from 'react-wordcloud';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faObjectGroup, faCode, faCubes, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
 
-const DATA_ENDPOINT = '/json/words.json'
+const DATA_ENDPOINT = '/json/words.json';
 
 class CodeView extends Component {
 
@@ -53,6 +54,11 @@ class CodeView extends Component {
             } else {
                 icon.color = "Black"
             }
+        });
+        ReactGA.event({ 
+            category: 'Develop Page',
+            action: 'Selected Icon: ' + title,
+            label: 'Navigation'
         });
     }
 
