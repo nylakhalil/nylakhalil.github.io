@@ -13,7 +13,7 @@ class Header extends Component {
                         <Nav>
                             <Nav.Link eventKey={1} href="/#">About</Nav.Link>
                             <Nav.Link eventKey={2} href="/#/develop">Develop</Nav.Link>
-                            <Nav.Link eventKey={3} href="/#/photography">Photograpy</Nav.Link>
+                            <Nav.Link eventKey={3} href="/#/photography">Photography</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
