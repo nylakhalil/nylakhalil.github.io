@@ -17,7 +17,7 @@ class CodeView extends Component {
                 { name: "design", color: "SeaGreen", "icon": faObjectGroup },
                 { name: "develop", color: "Black", "icon": faCode },
                 { name: "test", color: "Black", "icon": faShieldAlt },
-                { name: "deploy", color: "Black", "icon": faCubes },
+                { name: "deploy", color: "Black", "icon": faCubes }
             ],
             content: {},
             title: "",
@@ -47,7 +47,7 @@ class CodeView extends Component {
 
     handleClick(title) {
         this.setState({ title: title });
-        this.state.icons.map(icon => {
+        this.state.icons.forEach(function(icon) {
             if (icon.name === title) {
                 icon.color = "SeaGreen"
             } else {
