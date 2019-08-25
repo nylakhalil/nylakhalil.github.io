@@ -1,11 +1,12 @@
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom'
+import { HashRouter, Route } from 'react-router-dom';
 
-import Header from './components/Header'
-import Footer from './components/Footer'
-import HomeView from './components/HomeView'
-import CodeView from './components/CodeView'
-import PhotoView from './components/PhotoView'
+import { withTracker } from './withTracker';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomeView from './components/HomeView';
+import CodeView from './components/CodeView';
+import PhotoView from './components/PhotoView';
 
 import './App.css';
 
@@ -15,9 +16,9 @@ function App() {
             <Header />
             <main id="main">
                 <HashRouter basename={process.env.PUBLIC_URL}>
-                    <Route exact path='/' component={HomeView} />
-                    <Route path='/develop' component={CodeView} />
-                    <Route path='/photography' component={PhotoView} />
+                    <Route exact path='/' component={withTracker(HomeView)} />
+                    <Route path='/develop' component={withTracker(CodeView)} />
+                    <Route path='/photography' component={withTracker(PhotoView)} />
                 </HashRouter>
                 <Footer />
             </main>
