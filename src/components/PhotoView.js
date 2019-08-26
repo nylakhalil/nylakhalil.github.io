@@ -11,21 +11,16 @@ class PhotoView extends Component {
     
         this.state = {
             images: [],
-            interval: null,
-            error: {}
+            interval: null
         };
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
         fetch(DATA_ENDPOINT)
             .then(res => res.json())
-            .then((result) => 
-                {
-                    this.setState({ images: result });
-                }, (error) => {
-                    this.setState({ error: error });
-                }
-            ).catch(error => console.error('Error: ', error));
+            .then((result) => this.setState({ images: result }))
+            .catch(error => console.error('Error: ', error));
     }
 
     handleClick(title) {
@@ -43,7 +38,7 @@ class PhotoView extends Component {
                     {images.map(image => (
                     <Carousel.Item key={image.key}>
                         <img className="img-fluid" src={image.url} alt={image.title} />
-                        <Carousel.Caption onClick={this.handleClick.bind(this, image.title)}>
+                        <Carousel.Caption onClick={() => this.handleClick(image.title)}>
                             <a href={image.link} className="text-light">
                                 <small>{image.title}</small>
                             </a>

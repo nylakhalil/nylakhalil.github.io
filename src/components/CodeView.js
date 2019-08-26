@@ -37,6 +37,7 @@ class CodeView extends Component {
                 transitionDuration: 1000,
             }
         };
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -65,7 +66,7 @@ class CodeView extends Component {
     getIconCol(item) {
         return (
             <Col className="text-center" key={item.name}>
-                <span className="cursor-pointer icon-circle" onClick={this.handleClick.bind(this, item.name)} title={item.name}>
+                <span className="cursor-pointer icon-circle" onClick={() => this.handleClick(item.name)} title={item.name}>
                     <FontAwesomeIcon icon={item.icon} color={item.color}/>
                 </span>
                 <p className="h4 p-1 text-capitalize">{item.name}</p>
