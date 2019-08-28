@@ -86,7 +86,7 @@ class CodeView extends Component {
 
     getDescription(description) {
         return (
-            <blockquote className="mr-5 blockquote pl-4 pt-4">
+            <blockquote className="mr-5 blockquote pl-5 pt-4">
                 <p className="text-muted">
                     {description['content']}
                 </p>

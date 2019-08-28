@@ -20,8 +20,8 @@ function App() {
                     <Route path='/develop' component={withTracker(CodeView)} />
                     <Route path='/photography' component={withTracker(PhotoView)} />
                 </HashRouter>
-                <Footer />
             </main>
+            <Footer />
         </div>
     );
 }

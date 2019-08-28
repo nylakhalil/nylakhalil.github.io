@@ -2,10 +2,6 @@
   background-color: transparent !important;
 }
 
-#main {
-  height: 100vh !important;
-}
-
 #footer {
   background-color: transparent !important;
 }
@@ -13,7 +9,7 @@
 .leaflet-container {
     height: 100%;
     width: 100%;
-    min-height: 50vh;
+    min-height: 53vh;
 }
 
 #photo-view {
