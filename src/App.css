@@ -6,6 +6,13 @@
   background-color: transparent !important;
 }
 
+#app {
+  height: 100vh;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .leaflet-container {
     height: 100%;
     width: 100%;

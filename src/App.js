@@ -14,7 +14,7 @@ function App() {
     return (
         <div id="app">
             <Header />
-            <main id="main">
+            <main id="main" className="flex-grow-1">
                 <HashRouter basename={process.env.PUBLIC_URL}>
                     <Route exact path='/' component={withTracker(HomeView)} />
                     <Route path='/develop' component={withTracker(CodeView)} />
