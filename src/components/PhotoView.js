@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import ReactGA from 'react-ga';
 import Carousel from 'react-bootstrap/Carousel';
 
-const DATA_ENDPOINT = '/json/photos.json';
-
-class PhotoView extends Component {
+/**
+ * Bootstrap Carousel Component to render images specified in JSON file.
+ *
+ * @version 1.0.0
+ * @author Nyla Khalil
+ */
+export default class PhotoView extends Component {
 
     constructor(props) {
         super(props);
@@ -17,7 +21,7 @@ class PhotoView extends Component {
     }
 
     componentDidMount() {
-        fetch(DATA_ENDPOINT)
+        fetch(process.env.REACT_APP_PHOTOS_JSON)
             .then(res => res.json())
             .then((result) => this.setState({ images: result }))
             .catch(error => console.error('Error: ', error));
@@ -59,5 +63,3 @@ class PhotoView extends Component {
         return null
     }
 }
-  
-export default PhotoView;

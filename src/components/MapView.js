@@ -5,9 +5,12 @@ import L from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
 
-const { BaseLayer } = LayersControl;
-const DATA_ENDPOINT = '/json/map.json';
-
+/**
+ * Map View Component configured via JSON
+ *
+ * @version 1.0.0
+ * @author Nyla Khalil
+ */
 export default class MapView extends React.Component {
     
     constructor(props) {
@@ -27,7 +30,7 @@ export default class MapView extends React.Component {
     }
 
     componentDidMount() {
-        fetch(DATA_ENDPOINT)
+        fetch(process.env.REACT_APP_MAP_JSON)
             .then(response => { return response.json() })
             .then(data =>  this.setState({data: data}) )
             .catch(error => console.error('Error: ', error));
@@ -36,9 +39,9 @@ export default class MapView extends React.Component {
     getBaselayers(layer) {
         if (layer) {
             return (
-                <BaseLayer checked={layer.on === 'true'} key={layer.id} name={layer.name}>
+                <LayersControl.BaseLayer checked={layer.on === 'true'} key={layer.id} name={layer.name}>
                     <TileLayer attribution={layer.attribution} url={layer.url} />
-                </BaseLayer>
+                </LayersControl.BaseLayer>
             );
         }
     }

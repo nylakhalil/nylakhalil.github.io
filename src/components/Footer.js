@@ -3,7 +3,13 @@ import ReactGA from 'react-ga';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin , fa500px } from '@fortawesome/free-brands-svg-icons';
 
-class Footer extends Component {
+/**
+ * Footer Component with Social Icons and Copyright 
+ *
+ * @version 1.0.0
+ * @author Nyla Khalil
+ */
+export default class Footer extends Component {
 
     constructor(props) {
         super(props);
@@ -43,5 +49,3 @@ class Footer extends Component {
         );
     }
 }
-  
-export default Footer;

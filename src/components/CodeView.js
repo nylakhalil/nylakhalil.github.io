@@ -6,9 +6,13 @@ import ReactWordcloud from 'react-wordcloud';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faObjectGroup, faCode, faCubes, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
 
-const DATA_ENDPOINT = '/json/words.json';
-
-class CodeView extends Component {
+/**
+ * Develop View Component configured via JSON
+ *
+ * @version 1.0.0
+ * @author Nyla Khalil
+ */
+export default class CodeView extends Component {
 
     constructor(props) {
         super(props);
@@ -41,7 +45,7 @@ class CodeView extends Component {
     }
 
     componentDidMount() {
-        fetch(DATA_ENDPOINT)
+        fetch(process.env.REACT_APP_DEVELOP_JSON)
             .then(response => { return response.json() })
             .then(data =>  this.setState({content: data}) )
             .catch(error => console.error('Error: ', error));
@@ -131,5 +135,3 @@ class CodeView extends Component {
         );
     }
 }
-  
-export default CodeView;

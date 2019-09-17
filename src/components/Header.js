@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 
-class Header extends Component {
+/**
+ * Header Component utilizing Bootstrap Navbar with routes
+ *
+ * @version 1.0.0
+ * @author Nyla Khalil
+ */
+export default class Header extends Component {
 
     render() {
         return (
@@ -21,6 +27,3 @@ class Header extends Component {
         );
     }
 }
-  
-export default Header;
-  

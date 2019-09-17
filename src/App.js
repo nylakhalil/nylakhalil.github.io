@@ -10,7 +10,7 @@ import PhotoView from './components/PhotoView';
 
 import './App.css';
 
-function App() {
+export default function App() {
     return (
         <div id="app">
             <Header />
@@ -18,12 +18,10 @@ function App() {
                 <HashRouter basename={process.env.PUBLIC_URL}>
                     <Route exact path='/' component={withTracker(HomeView)} />
                     <Route path='/develop' component={withTracker(CodeView)} />
-                    <Route path='/photography' component={withTracker(PhotoView)} />
+                    <Route path='/photography' component={withTracker(PhotoView)} />        
                 </HashRouter>
             </main>
             <Footer />
         </div>
     );
 }
-
-export default App;
