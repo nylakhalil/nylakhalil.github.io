@@ -1,4 +1,4 @@
-name: GitHub Pages Build
+name: nylakhalil.github.io Build
 on: [push]
 jobs:
   build:
