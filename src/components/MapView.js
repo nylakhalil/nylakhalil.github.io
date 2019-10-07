@@ -123,7 +123,7 @@ export default class MapView extends React.Component {
                 
                 {this.state.data.markers.map(marker => this.getMarkers(marker))}
 
-                { this.state.latlng != null &&
+                { this.state.latlng &&
                 <Marker position={this.state.latlng} icon={this.getMarkerIcon('map-marker', 'limegreen')} draggable={true}>
                     <Popup>{this.state.popupMsg}</Popup>
                 </Marker>}
