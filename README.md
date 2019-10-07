@@ -1,4 +1,7 @@
-##### Nyla Khalil GitHub Page App
+##### nylakhalil.github.io
+_Nyla Khalil GitHub Pages App_
+
+![Build Status](https://github.com/nylakhalil/nylakhalil.github.io/workflows/nylakhalil.github.io%20Build/badge.svg)
 
 ##### Requirements
 - React (bootstrapped with [Create React App](https://github.com/facebook/create-react-app))
