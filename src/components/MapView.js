@@ -28,13 +28,13 @@ export default class MapView extends React.Component {
             latlng: null,
             popupMsg: '',
             geoData: {
-                    city: "",
-                    countryCode: "",
-                    isp: "",
-                    lat: 0,
-                    lon: 0,
-                    query: "",
-                    region: ""
+                    lat: null,
+                    lon: null,
+                    city: null,
+                    region: null,
+                    countryCode: null,
+                    query: null,
+                    isp: null
             }
         };
         this.handleClick = this.handleClick.bind(this);
@@ -128,7 +128,7 @@ export default class MapView extends React.Component {
                     <Popup>{this.state.popupMsg}</Popup>
                 </Marker>}
 
-                { coordinates && Object.keys(coordinates).length === 2 &&
+                { coordinates &&
                 <Marker position={coordinates} icon={this.getMarkerIcon('location-arrow', 'tomato')} draggable={false}>
                     <Popup>
                         <GeoIP 
