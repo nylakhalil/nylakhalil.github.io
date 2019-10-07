@@ -3,6 +3,8 @@ import ReactGA from 'react-ga';
 import { Map, LayersControl, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
+import GeoIP from './GeoIP';
+
 import 'leaflet/dist/leaflet.css';
 
 /**
@@ -24,7 +26,16 @@ export default class MapView extends React.Component {
                 markers: []
             },
             latlng: null,
-            popupMsg: ''
+            popupMsg: '',
+            geoData: {
+                    lat: null,
+                    lon: null,
+                    city: null,
+                    region: null,
+                    countryCode: null,
+                    query: null,
+                    isp: null
+            }
         };
         this.handleClick = this.handleClick.bind(this);
     }
@@ -32,7 +43,12 @@ export default class MapView extends React.Component {
     componentDidMount() {
         fetch(process.env.REACT_APP_MAP_JSON)
             .then(response => { return response.json() })
-            .then(data =>  this.setState({data: data}) )
+            .then(data =>  this.setState({data: data}))
+            .catch(error => console.error('Error: ', error));
+
+        fetch(process.env.REACT_APP_GEOIP_ENDPOINT)
+            .then(response => { return response.json() })
+            .then(data =>  this.setState({geoData: data}))
             .catch(error => console.error('Error: ', error));
     }
 
@@ -46,8 +62,11 @@ export default class MapView extends React.Component {
         }
     }
 
-    getMarkerIcon(iconName) {
-        let htmlText = '<i class="fa fa-{}" />'.replace('{}', iconName);
+    getMarkerIcon(iconName, iconColor) {
+        let htmlText = '<span style="color: COLOR;"><i class="fa fa-NAME" /></span>';
+        htmlText = htmlText.replace(/COLOR/g, iconColor);
+        htmlText = htmlText.replace(/NAME/g, iconName);
+
         return L.divIcon({
             className:'div-icon',
             html: htmlText,
@@ -59,7 +78,7 @@ export default class MapView extends React.Component {
 
     getMarkers(marker) {
         if (marker) {
-            let icon = this.getMarkerIcon(marker.icon);
+            let icon = this.getMarkerIcon(marker.icon, marker.color);
             return (
                 <Marker key={marker.id} position={marker.position} icon={icon}>
                     <Popup>{marker.text}</Popup>
@@ -90,17 +109,37 @@ export default class MapView extends React.Component {
     }
 
     render() {
+        let coordinates = null;
+        if (this.state.geoData.lat && this.state.geoData.lon) {
+            coordinates = [this.state.geoData.lat, this.state.geoData.lon];
+        }
+        const mapCenter = coordinates || this.state.data.center;
+
         return (
-            <Map center={this.state.data.center} zoom={this.state.data.zoom} onClick={this.handleClick}>
+            <Map center={mapCenter} zoom={this.state.data.zoom} onClick={this.handleClick}>
                 <LayersControl position="topright">
                     {this.state.data.baselayers.map(layer => this.getBaselayers(layer))}
                 </LayersControl>
                 
                 {this.state.data.markers.map(marker => this.getMarkers(marker))}
 
-                { this.state.latlng && 
-                <Marker position={this.state.latlng} icon={this.getMarkerIcon('map-marker')} draggable={true}>
+                { this.state.latlng &&
+                <Marker position={this.state.latlng} icon={this.getMarkerIcon('map-marker', 'limegreen')} draggable={true}>
                     <Popup>{this.state.popupMsg}</Popup>
+                </Marker>}
+
+                { coordinates &&
+                <Marker position={coordinates} icon={this.getMarkerIcon('location-arrow', 'tomato')} draggable={false}>
+                    <Popup>
+                        <GeoIP 
+                            lat={this.state.geoData.lat}
+                            lon={this.state.geoData.lon}
+                            city={this.state.geoData.city}
+                            region={this.state.geoData.region}
+                            country={this.state.geoData.countryCode}
+                            ip={this.state.geoData.query} 
+                            isp={this.state.geoData.isp} />
+                    </Popup>
                 </Marker>}
             </Map>
         );

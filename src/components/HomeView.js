@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MapView from './MapView';
-
 /**
  * About View Component with description and {@link MapView}
  *
@@ -31,6 +30,7 @@ export default class HomeView extends Component {
                     <h1 className="display-5">{name}</h1>
                     <p className="lead">{description}</p>
                 </div>
+                
                 <MapView />
             </div>
         );  
