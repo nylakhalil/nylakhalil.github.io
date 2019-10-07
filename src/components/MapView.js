@@ -28,13 +28,13 @@ export default class MapView extends React.Component {
             latlng: null,
             popupMsg: '',
             geoData: {
-                    lat: null,
-                    lon: null,
+                    latitude: null,
+                    longitude: null,
                     city: null,
                     region: null,
-                    countryCode: null,
-                    query: null,
-                    isp: null
+                    country_name: null,
+                    ip: null,
+                    org: null
             }
         };
         this.handleClick = this.handleClick.bind(this);
@@ -110,8 +110,8 @@ export default class MapView extends React.Component {
 
     render() {
         let coordinates = null;
-        if (this.state.geoData.lat && this.state.geoData.lon) {
-            coordinates = [this.state.geoData.lat, this.state.geoData.lon];
+        if (this.state.geoData.latitude && this.state.geoData.longitude) {
+            coordinates = [this.state.geoData.latitude, this.state.geoData.longitude];
         }
         const mapCenter = coordinates || this.state.data.center;
 
@@ -132,13 +132,13 @@ export default class MapView extends React.Component {
                 <Marker position={coordinates} icon={this.getMarkerIcon('location-arrow', 'tomato')} draggable={false}>
                     <Popup>
                         <GeoIP 
-                            lat={this.state.geoData.lat}
-                            lon={this.state.geoData.lon}
+                            lat={this.state.geoData.latitude}
+                            lon={this.state.geoData.longitude}
                             city={this.state.geoData.city}
                             region={this.state.geoData.region}
-                            country={this.state.geoData.countryCode}
-                            ip={this.state.geoData.query} 
-                            isp={this.state.geoData.isp} />
+                            country={this.state.geoData.country_name}
+                            ip={this.state.geoData.ip} 
+                            isp={this.state.geoData.org} />
                     </Popup>
                 </Marker>}
             </Map>
