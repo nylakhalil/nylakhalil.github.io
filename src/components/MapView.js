@@ -63,7 +63,7 @@ export default class MapView extends React.Component {
     }
 
     getMarkerIcon(iconName, iconColor) {
-        let htmlText = '<span style="color: COLOR;"><i class="fa fa-NAME" /></span>';
+        let htmlText = '<i class="fa fa-NAME fa-lg" style="color: COLOR;" />';
         htmlText = htmlText.replace(/COLOR/g, iconColor);
         htmlText = htmlText.replace(/NAME/g, iconName);
 
@@ -105,7 +105,7 @@ export default class MapView extends React.Component {
 
         const lat = latlng['lat'].toFixed(5); 
         const lng = latlng['lng'].toFixed(5);
-        return 'LatLng: ' + lat + ', ' + lng;
+        return 'Lat Lon: ' + lat + ', ' + lng;
     }
 
     render() {
