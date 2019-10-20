@@ -6,6 +6,7 @@ import L from 'leaflet';
 import GeoIP from './GeoIP';
 
 import 'leaflet/dist/leaflet.css';
+import WeatherControl from './WeatherControl';
 
 /**
  * Map View Component configured via JSON
@@ -26,8 +27,9 @@ export default class MapView extends React.Component {
                 markers: []
             },
             latlng: null,
-            popupMsg: '',
-            geoData: {
+            popupMsg: "",
+            weather: null,
+            location: {
                     latitude: null,
                     longitude: null,
                     city: null,
@@ -40,16 +42,47 @@ export default class MapView extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    componentDidMount() {
+    parseLocation(data) {
+        if (data) {
+          this.setState({
+            location: data
+          });
+
+          if (data.latitude && data.longitude) {
+            let url = process.env.REACT_APP_WEATHER_ENDPOINT;
+            url = url.replace("LATITUDE", data.latitude);
+            url = url.replace("LONGITUDE", data.longitude);
+            fetch(url)
+                .then(response => { return response.json() })
+                .then(data => this.parseWeather(data))
+                .catch(error => console.error('Weather Data Error: ', error));
+          }
+        }
+    }
+
+    parseWeather(data) {
+        if (data && data.properties && data.properties.periods.length > 0) {
+          let period = data.properties.periods[0];
+          this.setState({
+            weather: {
+                forecast: period.shortForecast,
+                temperature: period.temperature + period.temperatureUnit,
+                wind: period.windSpeed + " " + period.windDirection,
+            }
+          });
+        }
+    }
+
+    componentWillMount() {
         fetch(process.env.REACT_APP_MAP_JSON)
             .then(response => { return response.json() })
             .then(data =>  this.setState({data: data}))
-            .catch(error => console.error('Error: ', error));
+            .catch(error => console.error('Map Config Error: ', error));
 
         fetch(process.env.REACT_APP_GEOIP_ENDPOINT)
             .then(response => { return response.json() })
-            .then(data =>  this.setState({geoData: data}))
-            .catch(error => console.error('Error: ', error));
+            .then(data =>  this.parseLocation(data))
+            .catch(error => console.error('Location Data Error: ', error));
     }
 
     getBaselayers(layer) {
@@ -110,8 +143,8 @@ export default class MapView extends React.Component {
 
     render() {
         let coordinates = null;
-        if (this.state.geoData.latitude && this.state.geoData.longitude) {
-            coordinates = [this.state.geoData.latitude, this.state.geoData.longitude];
+        if (this.state.location.latitude && this.state.location.longitude) {
+            coordinates = [this.state.location.latitude, this.state.location.longitude];
         }
         const mapCenter = coordinates || this.state.data.center;
 
@@ -132,15 +165,21 @@ export default class MapView extends React.Component {
                 <Marker position={coordinates} icon={this.getMarkerIcon('location-arrow', 'tomato')} draggable={false}>
                     <Popup>
                         <GeoIP 
-                            lat={this.state.geoData.latitude}
-                            lon={this.state.geoData.longitude}
-                            city={this.state.geoData.city}
-                            region={this.state.geoData.region}
-                            country={this.state.geoData.country_name}
-                            ip={this.state.geoData.ip} 
-                            isp={this.state.geoData.org} />
+                            lat={this.state.location.latitude}
+                            lon={this.state.location.longitude}
+                            city={this.state.location.city}
+                            region={this.state.location.region}
+                            country={this.state.location.country_name}
+                            ip={this.state.location.ip} 
+                            isp={this.state.location.org} />
                     </Popup>
                 </Marker>}
+
+                { this.state.weather &&
+                <WeatherControl 
+                    forecast={this.state.weather.forecast}
+                    temperature={this.state.weather.temperature}
+                    wind={this.state.weather.wind} />}
             </Map>
         );
     }

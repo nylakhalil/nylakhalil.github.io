@@ -19,6 +19,15 @@
     min-height: 53vh;
 }
 
+.leaflet-bottom .leaflet-control {
+  margin-bottom: 2px;
+  margin-right: 10px;
+}
+
+.leaflet-left {
+  background: rgba(255, 255, 255, .7) !important;
+}
+
 #photo-view {
   background-color: black;
 }

@@ -6,15 +6,15 @@ import React, { useEffect } from 'react';
 import ReactGA from 'react-ga';
 
 if (process.env.NODE_ENV === "production") {
-    ReactGA.initialize(process.env.REACT_APP_GA_ENDPOINT);
+    ReactGA.initialize(process.env.REACT_APP_GA_CODE);
 } else if (process.env.NODE_ENV === "test") {
     /* NylaKhalil - initialize, but set test mode: 
     https://github.com/react-ga/react-ga#test-mode */
-    ReactGA.initialize(process.env.REACT_APP_GA_ENDPOINT, { testMode: true });
+    ReactGA.initialize(process.env.REACT_APP_GA_CODE, { testMode: true });
 } else {
     /* NylaKhalil - disable send in non-prod env: 
     https://developers.google.com/analytics/devguides/collection/analyticsjs/debugging */
-    ReactGA.initialize(process.env.REACT_APP_GA_ENDPOINT, { debug: false });
+    ReactGA.initialize(process.env.REACT_APP_GA_CODE, { debug: false });
     var ga = ReactGA.ga();
     ga('set', 'sendHitTask', null); 
 }
