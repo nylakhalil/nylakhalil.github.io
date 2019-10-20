@@ -11,28 +11,28 @@ import MapView from './MapView';
  */
 export default class HomeView extends Component {
 
-    static propTypes = {
-        name: PropTypes.string,
-        description: PropTypes.string
-    }
+  static propTypes = {
+    name: PropTypes.string,
+    description: PropTypes.string
+  }
 
-    static defaultProps = {
-        name: 'Nyla Khalil',
-        description: 'Full Stack Software Engineer',
-    }
+  static defaultProps = {
+    name: 'Nyla Khalil',
+    description: 'Full Stack Software Engineer',
+  }
 
-    render() {
-        const { name, description } = this.props;
+  render() {
+    const { name, description } = this.props;
 
-        return (
-            <div id="about" className="flex-grow-1 p-5">
-                <div className="jumbotron-fluid">
-                    <h1 className="display-5">{name}</h1>
-                    <p className="lead">{description}</p>
-                </div>
-                
-                <MapView />
-            </div>
-        );  
-    }           
+    return (
+      <div id="about" className="flex-grow-1 p-5">
+        <div className="jumbotron-fluid">
+          <h1 className="display-5">{name}</h1>
+          <p className="lead">{description}</p>
+        </div>
+
+        <MapView />
+      </div>
+    );
+  }
 }
