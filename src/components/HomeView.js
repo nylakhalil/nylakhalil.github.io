@@ -18,7 +18,7 @@ export default class HomeView extends Component {
 
   static defaultProps = {
     name: 'Nyla Khalil',
-    description: 'Full Stack Software Engineer',
+    description: 'Software Engineer',
   }
 
   render() {

@@ -6,7 +6,6 @@ import L from 'leaflet';
 import GeoIP from './GeoIP';
 
 import 'leaflet/dist/leaflet.css';
-import WeatherControl from './WeatherControl';
 
 /**
  * Map View Component configured via JSON
@@ -28,7 +27,6 @@ export default class MapView extends React.Component {
       },
       latlng: null,
       popupMsg: "",
-      weather: null,
       location: {
         latitude: null,
         longitude: null,
@@ -47,33 +45,10 @@ export default class MapView extends React.Component {
       this.setState({
         location: data
       });
-
-      if (data.latitude && data.longitude) {
-        let url = process.env.REACT_APP_WEATHER_ENDPOINT;
-        url = url.replace("LATITUDE", data.latitude);
-        url = url.replace("LONGITUDE", data.longitude);
-        fetch(url)
-          .then(response => { return response.json() })
-          .then(data => this.parseWeather(data))
-          .catch(error => console.error('Weather Data Error: ', error));
-      }
     }
   }
 
-  parseWeather(data) {
-    if (data && data.properties && data.properties.periods.length > 0) {
-      let period = data.properties.periods[0];
-      this.setState({
-        weather: {
-          forecast: period.shortForecast,
-          temperature: period.temperature + period.temperatureUnit,
-          wind: period.windSpeed + " " + period.windDirection,
-        }
-      });
-    }
-  }
-
-  componentWillMount() {
+  componentDidMount() {
     fetch(process.env.REACT_APP_MAP_JSON)
       .then(response => { return response.json() })
       .then(data => this.setState({ data: data }))
@@ -173,13 +148,8 @@ export default class MapView extends React.Component {
                 ip={this.state.location.ip}
                 isp={this.state.location.org} />
             </Popup>
-          </Marker>}
-
-        {this.state.weather &&
-          <WeatherControl
-            forecast={this.state.weather.forecast}
-            temperature={this.state.weather.temperature}
-            wind={this.state.weather.wind} />}
+          </Marker>
+        }
       </Map>
     );
   }
