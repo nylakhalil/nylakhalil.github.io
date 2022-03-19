@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 /**
  * @class GeoIP
@@ -13,9 +13,8 @@ import PropTypes from 'prop-types';
  * @property {string} isp - Internet Service Provider name (defaults to Unknown)
  * @version 1.0.0
  * @author Nyla Khalil
-*/
+ */
 export default class GeoIP extends Component {
-
   static propTypes = {
     lat: PropTypes.number,
     lon: PropTypes.number,
@@ -23,8 +22,8 @@ export default class GeoIP extends Component {
     region: PropTypes.string,
     country: PropTypes.string,
     ip: PropTypes.string,
-    isp: PropTypes.string
-  }
+    isp: PropTypes.string,
+  };
 
   static defaultProps = {
     lat: 0,
@@ -33,8 +32,8 @@ export default class GeoIP extends Component {
     region: "Unknown",
     country: "Unknown",
     ip: "Unknown",
-    isp: "Unknown"
-  }
+    isp: "Unknown",
+  };
 
   getContent(lat, lon, city, region, country, ip, isp) {
     const coordinates = JSON.stringify([lat, lon]);
@@ -43,13 +42,19 @@ export default class GeoIP extends Component {
     return (
       <div className="text-center text-muted">
         <p>
-          Your location resolved to <span className="font-italic">{city}, {region}, {country}</span>.
-          The geographic coordinates for this location are <span className="font-italic">{coordinates}</span>.
-          The IP Address is <span className="font-italic">{ip}</span> and <span className="font-italic">{isp}</span> is the provider.
-          This information was provided by {" "}
+          Your location resolved to{" "}
+          <span className="font-italic">
+            {city}, {region}, {country}
+          </span>
+          . The geographic coordinates for this location are{" "}
+          <span className="font-italic">{coordinates}</span>. The IP Address is{" "}
+          <span className="font-italic">{ip}</span> and{" "}
+          <span className="font-italic">{isp}</span> is the provider. This
+          information was provided by{" "}
           <a href={provider} target="_blank" rel="noopener noreferrer">
             <cite title="Data Provider">{provider}</cite>
-          </a>.
+          </a>
+          .
         </p>
       </div>
     );

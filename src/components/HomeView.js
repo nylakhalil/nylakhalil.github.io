@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import MapView from './MapView';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import MapView from "./MapView";
 /**
  * About View Component with description and {@link MapView}
  *
@@ -10,16 +10,15 @@ import MapView from './MapView';
  * @author Nyla Khalil
  */
 export default class HomeView extends Component {
-
   static propTypes = {
     name: PropTypes.string,
-    description: PropTypes.string
-  }
+    description: PropTypes.string,
+  };
 
   static defaultProps = {
-    name: 'Nyla Khalil',
-    description: 'Software Engineer',
-  }
+    name: "Nyla Khalil",
+    description: "Software Engineer",
+  };
 
   render() {
     const { name, description } = this.props;

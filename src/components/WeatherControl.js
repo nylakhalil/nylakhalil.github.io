@@ -1,6 +1,6 @@
 import { withLeaflet, MapControl } from "react-leaflet";
 import L from "leaflet";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 /**
  * @class WeatherControl
@@ -11,34 +11,41 @@ import PropTypes from 'prop-types';
  * @property {string} position - Placement of Weather Control on map (defaults to bottomleft)
  * @version 1.0.0
  * @author Nyla Khalil
-*/
+ */
 class WeatherControl extends MapControl {
-
   static propTypes = {
     forecast: PropTypes.string,
     temperature: PropTypes.string,
     wind: PropTypes.string,
-    position: PropTypes.string
-  }
+    position: PropTypes.string,
+  };
 
   static defaultProps = {
     forecast: "",
     temperature: "",
     wind: "",
-    position: "bottomleft"
-  }
+    position: "bottomleft",
+  };
 
   createWeatherHTML() {
-    return '<span>' + this.props.temperature + ' ' + this.props.forecast + ' ' + this.props.wind + '</span>';
+    return (
+      "<span>" +
+      this.props.temperature +
+      " " +
+      this.props.forecast +
+      " " +
+      this.props.wind +
+      "</span>"
+    );
   }
 
   createLeafletElement() {
     const WeatherControl = L.Control.extend({
-      onAdd: map => {
+      onAdd: (map) => {
         this.div = L.DomUtil.create("div", "weather");
         this.div.innerHTML = this.createWeatherHTML();
         return this.div;
-      }
+      },
     });
     return new WeatherControl({ position: this.props.position });
   }
