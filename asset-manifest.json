@@ -1,13 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.07d7c3e3.chunk.css",
-    "main.js": "/static/js/main.d7431959.chunk.js",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "static/css/2.ec5b52bd.chunk.css": "/static/css/2.ec5b52bd.chunk.css",
-    "static/js/2.fb6519dc.chunk.js": "/static/js/2.fb6519dc.chunk.js",
-    "index.html": "/index.html",
-    "precache-manifest.0dee700d0f73b312a2a4fedbb15a0cf0.js": "/precache-manifest.0dee700d0f73b312a2a4fedbb15a0cf0.js",
-    "service-worker.js": "/service-worker.js",
-    "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.fee66e71.woff"
-  }
+    "main.css": "/static/css/main.1136e21d.css",
+    "main.js": "/static/js/main.15dfb703.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/fontawesome-webfont.eot": "/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "index.html": "/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.1136e21d.css",
+    "static/js/main.15dfb703.js"
+  ]
 }
