@@ -1,8 +1,10 @@
 ##### nylakhalil.github.io
 _Nyla Khalil GitHub Pages_
 
-![CI Status](https://github.com/nylakhalil/nylakhalil.github.io/workflows/ci/badge.svg)
+[![CI](https://github.com/nylakhalil/nylakhalil.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/nylakhalil/nylakhalil.github.io/actions/workflows/ci.yml)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
+
 ##### Requirements
 - React (bootstrapped with [Create React App](https://github.com/facebook/create-react-app))
 - Leaflet (React-Leaflet)
