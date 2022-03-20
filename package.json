@@ -34,7 +34,7 @@
     "prettier": "./node_modules/.bin/prettier --check 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
     "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "test": "react-scripts test",
+    "test": "CI=true react-scripts test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b master -d build",
     "eject": "react-scripts eject"
