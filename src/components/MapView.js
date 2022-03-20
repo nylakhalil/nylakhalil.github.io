@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import ReactGA from "react-ga";
 import { Map, LayersControl, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
@@ -13,7 +13,7 @@ import "leaflet/dist/leaflet.css";
  * @version 1.0.0
  * @author Nyla Khalil
  */
-export default class MapView extends React.Component {
+export default class MapView extends Component {
   constructor(props) {
     super(props);
 

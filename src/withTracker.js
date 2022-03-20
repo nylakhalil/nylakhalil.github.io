@@ -2,7 +2,7 @@
  * From ReactGA Community Wiki Page https://github.com/react-ga/react-ga/wiki/React-Router-v4-withTracker
  */
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import ReactGA from "react-ga";
 
 if (process.env.NODE_ENV === "production") {
