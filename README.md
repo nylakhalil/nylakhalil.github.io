@@ -27,7 +27,7 @@ npm start
 ```
 
 ##### Test
-Launches the test runner in the interactive watch mode.
+Launches the test runner.
 
 ```
 npm test
@@ -38,6 +38,9 @@ Creates a production build
 
 ```
 npm run build
+
+# Use serve to test build
+npm run serve
 ```
 
 ##### Deploy
