@@ -1,0 +1,171 @@
+{
+    "design": {
+        "words": [
+            {
+                "text": "Requirements",
+                "value": "1"
+            },
+            {
+                "text": "Analysis",
+                "value": "1"
+            },
+            {
+                "text": "Specifications",
+                "value": "1"
+            },
+            {
+                "text": "Integration",
+                "value": "1"
+            },
+            {
+                "text": "Modular",
+                "value": "1"
+            },
+            {
+                "text": "Secure",
+                "value": "1"
+            },
+            {
+                "text": "Scalable",
+                "value": "1"
+            },
+            {
+                "text": "SOA",
+                "value": "1"
+            },
+            {
+                "text": "Microservices",
+                "value": "1"
+            }
+        ],
+        "content": "Software design is the process of envisioning and defining software solutions to one or more sets of problems.",
+        "source": "Wikipedia",
+        "link": "https://en.wikipedia.org/wiki/Software_design"
+    },
+    "develop": {
+        "words": [
+            {
+                "text": "Java",
+                "value": "1"
+            },
+            {
+                "text": "Angular",
+                "value": "1"
+            },
+            {
+                "text": "React",
+                "value": "1"
+            },
+            {
+                "text": "Python",
+                "value": "1"
+            },
+            {
+                "text": "Bootstrap",
+                "value": "1"
+            },
+            {
+                "text": "Material Design",
+                "value": "1"
+            },
+            {
+                "text": "HTML",
+                "value": "1"
+            },
+            {
+                "text": "CSS",
+                "value": "1"
+            },
+            {
+                "text": "REST",
+                "value": "1"
+            },
+            {
+                "text": "JSON",
+                "value": "1"
+            },
+            {
+                "text": "XML",
+                "value": "1"
+            },
+            {
+                "text": "Git",
+                "value": "1"
+            }
+        ],
+        "content": "Software development is the process of conceiving, specifying, designing, programming, documenting, testing, and bug fixing involved in creating and maintaining applications, frameworks, or other software components.",
+        "source": "Wikipedia",
+        "link": "https://en.wikipedia.org/wiki/Software_development"
+    },
+    "test": {
+        "words": [
+        {
+            "text": "JUnit",
+            "value": "1"
+        },
+        {
+            "text": "Jest",
+            "value": "1"
+        },
+        {
+            "text": "Karma",
+            "value": "1"
+        },
+        {
+            "text": "TDD",
+            "value": "1"
+        },
+        {
+            "text": "User Acceptance Testing",
+            "value": "1"
+        },
+        {
+            "text": "Integration Testing",
+            "value": "1"
+        },
+        {
+            "text": "Functional Testing",
+            "value": "1"
+        }
+        
+        ],
+        "content": "Test techniques include the process of executing a program or application with the intent of finding software bugs (errors or other defects), and verifying that the software product is fit for use.",
+        "source": "Wikipedia",
+        "link": "https://en.wikipedia.org/wiki/Software_testing"
+    },
+    "deploy": {
+        "words": [
+        {
+            "text": "Cloud",
+            "value": "1"
+        },
+        {
+            "text": "Web Server",
+            "value": "1"
+        },
+        {
+            "text": "AWS",
+            "value": "1"
+        },
+        {
+            "text": "Release",
+            "value": "1"
+        },
+        {
+            "text": "DevOps",
+            "value": "1"
+        },
+        {
+            "text": "Jenkins",
+            "value": "1"
+        },
+        {
+            "text": "CI/CD",
+            "value": "1"
+        }
+        ],
+        "content": "Software deployment is all of the activities that make a software system available for use. The general deployment process consists of several interrelated activities with possible transitions between them.",
+        "source": "Wikipedia",
+        "link": "https://en.wikipedia.org/wiki/Software_deployment"
+    }
+}
