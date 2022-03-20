@@ -1,4 +1,4 @@
-name: Deploy
+name: CI
 on:
   push:
     branches:
@@ -7,28 +7,25 @@ env:
   CI: true
 jobs:
   run:
-    name: Node ${{ matrix.node }} / ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Node CI
+    runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
       matrix:
-        os:
-          - ubuntu-latest
-        node:
-          - 16
+        node-version: [16.x]
     steps:
       - name: Clone
         uses: actions/checkout@v2
-      - name: Set Node.js version ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - name: Version
         run: |
           node --version
           npm --version
       - name: Install
-        run: npm install
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Test
