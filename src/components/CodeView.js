@@ -118,7 +118,7 @@ export default class CodeView extends Component {
     const title = this.state.title || "design";
 
     return (
-      <div className="d-block p-5">
+      <div className="h-100 d-block p-5">
         <Row className="p-3 d-flex justify-content-between" noGutters={true}>
           {this.state.icons.map((icon) => this.getIconCol(icon))}
         </Row>

@@ -29,11 +29,12 @@
 }
 
 #photo-view {
+  height: 100%;
   background-color: black;
 }
 
 .carousel {
-  height: 100vh;
+  height: 100%;
 }
 
 .carousel-inner {
