@@ -1,6 +1,6 @@
 import { Component } from "react";
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import MapView from "./MapView";
 

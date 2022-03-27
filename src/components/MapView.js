@@ -7,11 +7,11 @@ import GeoIP from "./GeoIP";
 
 import "leaflet/dist/leaflet.css";
 
-const initMarker = ref => {
+const initMarker = (ref) => {
   if (ref) {
-    ref.leafletElement.openPopup()
+    ref.leafletElement.openPopup();
   }
-}
+};
 
 /**
  * Map View Component configured via JSON
@@ -137,7 +137,7 @@ export default class MapView extends Component {
         this.state.location.longitude,
       ];
     }
-    
+
     const mapCenter = coordinates ? coordinates : this.state.data.center;
 
     return (

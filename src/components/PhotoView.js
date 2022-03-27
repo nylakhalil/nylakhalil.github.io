@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import MobileStepper from "@mui/material/MobileStepper";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import ReactGA from "react-ga";
-import SwipeableViews from 'react-swipeable-views';
+import SwipeableViews from "react-swipeable-views";
 import theme from "../theme";
 
 /**
@@ -21,13 +21,13 @@ export default function PhotoView() {
 
   useEffect(() => {
     fetch(process.env.REACT_APP_PHOTOS_JSON)
-    .then((res) => res.json())
-    .then((result) => {
-      setImages(result);
-      console.log(result.length);
-      setMaxSteps(result.length);
-    })
-    .catch((error) => console.error("Error: ", error));
+      .then((res) => res.json())
+      .then((result) => {
+        setImages(result);
+        console.log(result.length);
+        setMaxSteps(result.length);
+      })
+      .catch((error) => console.error("Error: ", error));
   }, []);
 
   const handleNext = () => {
@@ -43,46 +43,90 @@ export default function PhotoView() {
       label: "Navigation",
     });
   };
-  
+
   return (
-    <Box sx={{ height: '100%', backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Box
+      sx={{
+        height: "100%",
+        backgroundColor: "black",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
         <FontAwesomeIcon icon={faAngleLeft} size="2x" inverse />
       </Button>
 
-      <Box sx={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', p: 0, m: 0 }}>
+      <Box
+        sx={{
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          p: 0,
+          m: 0,
+        }}
+      >
         <SwipeableViews index={activeStep} enableMouseEvents>
           {images.map((image, index) => (
-            <Box key={'img-parent-' + index} sx={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-              <Box key={'img-' + index} component="img" src={image.url} alt={image.title} sx={{ height: 'auto',  maxWidth: '100%' }} />
-              <Button key={'img-caption-' + index} size="small" color='info' href={image.link}>{image.title}</Button>
+            <Box
+              key={"img-parent-" + index}
+              sx={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <Box
+                key={"img-" + index}
+                component="img"
+                src={image.url}
+                alt={image.title}
+                sx={{ height: "auto", maxWidth: "100%" }}
+              />
+              <Button
+                key={"img-caption-" + index}
+                size="small"
+                color="info"
+                href={image.link}
+              >
+                {image.title}
+              </Button>
             </Box>
           ))}
         </SwipeableViews>
-        <MobileStepper 
-          variant="dots" 
-          steps={maxSteps} 
+        <MobileStepper
+          variant="dots"
+          steps={maxSteps}
           position="static"
           activeStep={activeStep}
           sx={{
             p: 0,
             m: 0,
-            background: 'transparent',
+            background: "transparent",
             "& .MuiMobileStepper-dots": {
               "& .MuiMobileStepper-dot": {
-                "backgroundColor":theme.palette.primary.light,
+                backgroundColor: theme.palette.primary.light,
               },
               "& .MuiMobileStepper-dotActive": {
-                "backgroundColor": theme.palette.primary.main,
+                backgroundColor: theme.palette.primary.main,
               },
-            }
+            },
           }}
         />
       </Box>
 
-      <Button size="small" onClick={handleNext} disabled={activeStep === (maxSteps - 1)}>
+      <Button
+        size="small"
+        onClick={handleNext}
+        disabled={activeStep === maxSteps - 1}
+      >
         <FontAwesomeIcon icon={faAngleRight} size="2x" inverse />
       </Button>
     </Box>
-  )
-};
+  );
+}

@@ -1,6 +1,6 @@
 import { HashRouter, Route, Switch } from "react-router-dom";
-import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faMapPin, faLocationArrow } from '@fortawesome/free-solid-svg-icons';
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faMapPin, faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 
 import { withTracker } from "./withTracker";
 import Header from "./components/Header";
@@ -18,7 +18,14 @@ dom.watch();
 
 function NoMatch(): JSX.Element {
   return (
-    <Box sx={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Box
+      sx={{
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Typography variant="body1">
         {"The requested page was not found"}
       </Typography>

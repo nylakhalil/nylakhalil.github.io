@@ -7,14 +7,13 @@ import {
   faCubes,
   faShieldAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { Box, Card, Grid, Tab, Tabs } from '@mui/material';
-import CardActions from '@mui/material/CardActions'
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-
+import { Box, Card, Grid, Tab, Tabs } from "@mui/material";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 const DescriptionCard = (props) => {
   const { title, description, link } = props;
@@ -22,22 +21,36 @@ const DescriptionCard = (props) => {
     <>
       <Card sx={{ width: 600 }}>
         <CardContent>
-          <Typography gutterBottom variant="h5" color="text.secondary" sx={{ textTransform: 'capitalize' }}>
+          <Typography
+            gutterBottom
+            variant="h5"
+            color="text.secondary"
+            sx={{ textTransform: "capitalize" }}
+          >
             {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button size="small" color="primary" href={link} target="_blank" rel="noopener noreferrer">
+        <CardActions
+          disableSpacing
+          sx={{ display: "flex", justifyContent: "flex-end" }}
+        >
+          <Button
+            size="small"
+            color="primary"
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Wikipedia
           </Button>
         </CardActions>
       </Card>
     </>
   );
-}
+};
 
 const WordCloudCard = (props) => {
   const { options, words } = props;
@@ -46,7 +59,7 @@ const WordCloudCard = (props) => {
       <ReactWordcloud options={options} words={words} />
     </Card>
   );
-}
+};
 
 /**
  * Develop View Component configured via JSON
@@ -106,7 +119,10 @@ export default class CodeView extends Component {
     const options = this.state.options;
 
     const handleChange = (event, newValue) => {
-      this.setState({ tabIndex: newValue, title: event.target.innerText.toLowerCase() });
+      this.setState({
+        tabIndex: newValue,
+        title: event.target.innerText.toLowerCase(),
+      });
       ReactGA.event({
         category: "Develop Page",
         action: "Selected Icon: " + title,
@@ -115,16 +131,35 @@ export default class CodeView extends Component {
     };
 
     return (
-      <Box sx={{m: 3, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-
-        <Tabs value={this.state.tabIndex} onChange={handleChange} aria-label="icon label tabs example">
+      <Box
+        sx={{
+          m: 3,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <Tabs
+          value={this.state.tabIndex}
+          onChange={handleChange}
+          aria-label="icon label tabs example"
+        >
           <Tab icon={<FontAwesomeIcon icon={faPalette} />} label="design" />
           <Tab icon={<FontAwesomeIcon icon={faCode} />} label="develop" />
           <Tab icon={<FontAwesomeIcon icon={faShieldAlt} />} label="test" />
           <Tab icon={<FontAwesomeIcon icon={faCubes} />} label="deploy" />
         </Tabs>
 
-        <Box sx={{m: 3, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+        <Box
+          sx={{
+            m: 3,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           <Grid container spacing={0} columns={16}>
             <Grid container spacing={0} columns={16}>
               <Grid item xs={8}>
@@ -135,11 +170,15 @@ export default class CodeView extends Component {
               </Grid>
             </Grid>
             <Grid container spacing={0} columns={16}>
-              <Grid item xs={0} sm={0} md={8} >
+              <Grid item xs={0} sm={0} md={8}>
                 <div></div>
               </Grid>
               <Grid item xs={8}>
-                <DescriptionCard title={title} description={description} link={link} />
+                <DescriptionCard
+                  title={title}
+                  description={description}
+                  link={link}
+                />
               </Grid>
             </Grid>
           </Grid>
