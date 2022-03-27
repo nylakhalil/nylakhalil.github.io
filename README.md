@@ -5,13 +5,6 @@ _Nyla Khalil GitHub Pages_
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 
-##### Requirements
-- React (bootstrapped with [Create React App](https://github.com/facebook/create-react-app))
-- Leaflet (React-Leaflet)
-- Bootstrap (React-Bootstrap)
-- Font-Awesome (React-Fontawesome)
-- React-Wordcloud (React-Wordcloud)
-
 ##### Configure
 Install dependencies 
 

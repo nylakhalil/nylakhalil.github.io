@@ -7,6 +7,12 @@ import GeoIP from "./GeoIP";
 
 import "leaflet/dist/leaflet.css";
 
+const initMarker = ref => {
+  if (ref) {
+    ref.leafletElement.openPopup()
+  }
+}
+
 /**
  * Map View Component configured via JSON
  *
@@ -131,7 +137,8 @@ export default class MapView extends Component {
         this.state.location.longitude,
       ];
     }
-    const mapCenter = coordinates || this.state.data.center;
+    
+    const mapCenter = coordinates ? coordinates : this.state.data.center;
 
     return (
       <Map
@@ -158,6 +165,7 @@ export default class MapView extends Component {
         {coordinates && (
           <Marker
             position={coordinates}
+            ref={initMarker}
             icon={this.getMarkerIcon("location-arrow", "tomato")}
             draggable={false}
           >

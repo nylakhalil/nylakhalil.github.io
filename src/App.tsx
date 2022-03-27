@@ -1,4 +1,6 @@
 import { HashRouter, Route, Switch } from "react-router-dom";
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import { faMapPin, faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 
 import { withTracker } from "./withTracker";
 import Header from "./components/Header";
@@ -8,6 +10,10 @@ import CodeView from "./components/CodeView";
 import PhotoView from "./components/PhotoView";
 
 import "./App.css";
+
+library.add(faLocationArrow);
+library.add(faMapPin);
+dom.watch();
 
 function NoMatch(): JSX.Element {
   return (
@@ -27,7 +33,7 @@ export default function App(): JSX.Element {
         <HashRouter basename={process.env.PUBLIC_URL}>
           <Switch>
             <Route exact path="/" component={withTracker(HomeView)} />
-            <Route path="/develop" component={withTracker(CodeView)} />
+            <Route path="/development" component={withTracker(CodeView)} />
             <Route path="/photography" component={withTracker(PhotoView)} />
             <Route path="*" component={NoMatch} />
           </Switch>
