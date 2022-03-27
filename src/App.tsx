@@ -10,6 +10,7 @@ import CodeView from "./components/CodeView";
 import PhotoView from "./components/PhotoView";
 
 import "./App.css";
+import { Box, Typography } from "@mui/material";
 
 library.add(faLocationArrow);
 library.add(faMapPin);
@@ -17,11 +18,11 @@ dom.watch();
 
 function NoMatch(): JSX.Element {
   return (
-    <div className="h-100 d-flex justify-content-center align-items-center">
-      <blockquote className="blockquote align-middle text-center">
+    <Box sx={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Typography variant="body1">
         {"The requested page was not found"}
-      </blockquote>
-    </div>
+      </Typography>
+    </Box>
   );
 }
 
