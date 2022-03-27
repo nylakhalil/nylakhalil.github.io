@@ -1,17 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "font-awesome/css/font-awesome.min.css";
-
 import "./index.css";
 import App from "./App";
+import theme from "./theme";
+import { ThemeProvider } from "@mui/material/styles";
 import * as serviceWorker from "./serviceWorker";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

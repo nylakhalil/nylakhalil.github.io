@@ -1,16 +1,24 @@
-#header {
-  background-color: transparent !important;
+html {
+  height: 100%;
+  width: 100%;
 }
 
-#footer {
-  background-color: transparent !important;
+body {
+  margin: 0;
+  padding: 0;
 }
 
 #app {
-  height: 100vh;
+  height: 100%;
   width: auto;
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
+}
+
+#main {
+  height: 100%;
+  width: auto;
 }
 
 .leaflet-container {
@@ -28,26 +36,6 @@
   background: rgba(255, 255, 255, 0.7) !important;
 }
 
-#photo-view {
-  height: 100%;
-  background-color: black;
-}
-
-.carousel {
-  height: 100%;
-}
-
-.carousel-inner {
-  height: 100%;
-  display: flex;
-}
-
-.carousel-item.active {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
@@ -57,10 +45,4 @@
   min-height: 200px;
   height: 60%;
   width: 60%;
-}
-
-.icon-circle {
-  padding: 0.5em;
-  border-radius: 100%;
-  background: lightgray;
 }

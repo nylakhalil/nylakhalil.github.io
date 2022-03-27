@@ -1,34 +1,43 @@
-import { Component } from "react";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import AppBar from "@mui/material/AppBar";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import Toolbar from "@mui/material/Toolbar";
 
 /**
- * Header Component utilizing Bootstrap Navbar with routes
+ * Header Component utilizing MUI AppBar with routes
  *
- * @version 1.0.0
+ * @version 2.0.0
  * @author Nyla Khalil
  */
-export default class Header extends Component {
-  render() {
-    return (
-      <header id="header">
-        <Navbar collapseOnSelect expand="lg">
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Nav>
-              <Nav.Link eventKey={1} href="/#">
-                About
-              </Nav.Link>
-              <Nav.Link eventKey={2} href="/#/develop">
-                Develop
-              </Nav.Link>
-              <Nav.Link eventKey={3} href="/#/photography">
-                Photography
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </header>
-    );
-  }
+export default function Header() {
+  return (
+    <AppBar color="transparent" position="static" sx={{ boxShadow: 0 }}>
+      <Toolbar disableGutters={true} sx={{ mr: "10px" }}>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1 }}
+        ></Typography>
+        <Link href="/#" color="inherit" underline="none" sx={{ mr: "10px" }}>
+          About
+        </Link>
+        <Link
+          href="/#/development"
+          color="inherit"
+          underline="none"
+          sx={{ mr: "10px" }}
+        >
+          Development
+        </Link>
+        <Link
+          href="/#/photography"
+          color="inherit"
+          underline="none"
+          sx={{ mr: "10px" }}
+        >
+          Photography
+        </Link>
+      </Toolbar>
+    </AppBar>
+  );
 }
