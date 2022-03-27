@@ -1,6 +1,6 @@
-import { Component } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import ReactWordcloud from "react-wordcloud";
+import ReactWordcloud, { OptionsProp } from "react-wordcloud";
 import {
   faPalette,
   faCode,
@@ -14,12 +14,14 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { DEVELOP_JSON_ENDPOINT } from "../config/AppConfig";
+import { CodeViewResponse, DescriptionCardProps, WordCloudCardProps } from "../types";
 
-const DescriptionCard = (props) => {
+const DescriptionCard = (props: DescriptionCardProps) => {
   const { title, description, link } = props;
   return (
     <>
-      <Card sx={{ width: 600 }}>
+      <Card>
         <CardContent>
           <Typography
             gutterBottom
@@ -52,10 +54,10 @@ const DescriptionCard = (props) => {
   );
 };
 
-const WordCloudCard = (props) => {
+const WordCloudCard = (props: WordCloudCardProps) => {
   const { options, words } = props;
   return (
-    <Card sx={{ width: 600 }}>
+    <Card>
       <ReactWordcloud options={options} words={words} />
     </Card>
   );
@@ -67,70 +69,73 @@ const WordCloudCard = (props) => {
  * @version 2.0.0
  * @author Nyla Khalil
  */
-export default class CodeView extends Component {
-  constructor(props) {
-    super(props);
+export default function CodeView() {
+  const [tabIndex, setTabIndex] = useState<number>(0);
+  const [stageTitle, setStageTitle] = useState<string>("design");
+  const [stageInfo, setStageInfo] = useState<CodeViewResponse | null>(null);
+  const [options] = useState<OptionsProp>({
+    colors: ["#B5BABE"],
+    enableTooltip: false,
+    fontFamily: "impact",
+    fontSizes: [5, 40],
+    fontStyle: "normal",
+    fontWeight: "normal",
+    padding: 10,
+    rotations: 1,
+    rotationAngles: [0, 90],
+    scale: "sqrt",
+    spiral: "archimedean",
+    transitionDuration: 1000
+  });
 
-    this.state = {
-      icons: [
-        { name: "design", color: "SeaGreen", icon: faPalette },
-        { name: "develop", color: "Black", icon: faCode },
-        { name: "test", color: "Black", icon: faShieldAlt },
-        { name: "deploy", color: "Black", icon: faCubes },
-      ],
-      tabIndex: 0,
-      content: {},
-      title: "design",
-      options: {
-        colors: ["#B5BABE"],
-        enableTooltip: false,
-        fontFamily: "impact",
-        fontSizes: [5, 40],
-        fontStyle: "normal",
-        fontWeight: "normal",
-        padding: 10,
-        rotations: 1,
-        rotationAngles: [0, 90],
-        scale: "sqrt",
-        spiral: "archimedean",
-        transitionDuration: 1000,
-      },
-    };
-  }
-
-  componentDidMount() {
-    fetch(process.env.REACT_APP_DEVELOP_JSON)
+  useEffect(() => {
+    fetch(DEVELOP_JSON_ENDPOINT)
       .then((response) => {
         return response.json();
       })
-      .then((data) => this.setState({ content: data }))
+      .then((data) => setStageInfo(data))
       .catch((error) => console.error("Error: ", error));
+  }, []);
+
+  if (!stageInfo || Object.keys(stageInfo).length === 0) {
+    return null;
   }
 
-  render() {
-    if (!this.state.content || Object.keys(this.state.content).length === 0) {
-      return null;
-    }
+  const description = stageInfo[stageTitle]["content"];
+  const link = stageInfo[stageTitle]["link"];
+  const words = stageInfo[stageTitle]["words"];
 
-    const title = this.state.title || "design";
-    const description = this.state.content[title]["content"];
-    const link = this.state.content[title]["link"];
-    const words = this.state.content[title]["words"];
-    const options = this.state.options;
+  const handleChange = (event: SyntheticEvent, newTabIndex: number) => {
+    setTabIndex(newTabIndex);
+    setStageTitle(event.currentTarget.textContent || 'design');
+    ReactGA.event({
+      category: "Develop Page",
+      action: "Selected Icon: " + stageTitle,
+      label: "Navigation",
+    });
+  };
 
-    const handleChange = (event, newValue) => {
-      this.setState({
-        tabIndex: newValue,
-        title: event.target.innerText.toLowerCase(),
-      });
-      ReactGA.event({
-        category: "Develop Page",
-        action: "Selected Icon: " + title,
-        label: "Navigation",
-      });
-    };
+  return (
+    <Box
+      sx={{
+        m: 3,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      <Tabs
+        value={tabIndex}
+        onChange={handleChange}
+        aria-label="Stages"
+      >
+        <Tab icon={<FontAwesomeIcon icon={faPalette} />} label="design" />
+        <Tab icon={<FontAwesomeIcon icon={faCode} />} label="develop" />
+        <Tab icon={<FontAwesomeIcon icon={faShieldAlt} />} label="test" />
+        <Tab icon={<FontAwesomeIcon icon={faCubes} />} label="deploy" />
+      </Tabs>
 
-    return (
       <Box
         sx={{
           m: 3,
@@ -140,50 +145,29 @@ export default class CodeView extends Component {
           flexDirection: "column",
         }}
       >
-        <Tabs
-          value={this.state.tabIndex}
-          onChange={handleChange}
-          aria-label="icon label tabs example"
-        >
-          <Tab icon={<FontAwesomeIcon icon={faPalette} />} label="design" />
-          <Tab icon={<FontAwesomeIcon icon={faCode} />} label="develop" />
-          <Tab icon={<FontAwesomeIcon icon={faShieldAlt} />} label="test" />
-          <Tab icon={<FontAwesomeIcon icon={faCubes} />} label="deploy" />
-        </Tabs>
-
-        <Box
-          sx={{
-            m: 3,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
+        <Grid container spacing={0} columns={16}>
           <Grid container spacing={0} columns={16}>
-            <Grid container spacing={0} columns={16}>
-              <Grid item xs={8}>
-                <WordCloudCard options={options} words={words} />
-              </Grid>
-              <Grid item xs={0} sm={0} md={8}>
-                <div></div>
-              </Grid>
+            <Grid item xs={16} sm={16} md={8}>
+              <WordCloudCard options={options} words={words} />
             </Grid>
-            <Grid container spacing={0} columns={16}>
-              <Grid item xs={0} sm={0} md={8}>
-                <div></div>
-              </Grid>
-              <Grid item xs={8}>
-                <DescriptionCard
-                  title={title}
-                  description={description}
-                  link={link}
-                />
-              </Grid>
+            <Grid item xs={0} sm={0} md={8}>
+              <div></div>
             </Grid>
           </Grid>
-        </Box>
+          <Grid container spacing={0} columns={16}>
+            <Grid item xs={0} sm={0} md={8}>
+              <div></div>
+            </Grid>
+            <Grid item xs={16} sm={16} md={8}>
+              <DescriptionCard
+                title={stageTitle}
+                description={description}
+                link={link}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
       </Box>
-    );
-  }
+    </Box>
+  );
 }

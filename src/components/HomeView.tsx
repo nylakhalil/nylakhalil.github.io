@@ -1,7 +1,6 @@
-import { Component } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import PropTypes from "prop-types";
+import { HomeViewProps } from "../types";
 import MapView from "./MapView";
 
 /**
@@ -12,26 +11,14 @@ import MapView from "./MapView";
  * @version 2.0.0
  * @author Nyla Khalil
  */
-export default class HomeView extends Component {
-  static propTypes = {
-    name: PropTypes.string,
-    description: PropTypes.string,
-  };
+export default function HomeView(props: HomeViewProps) {
+  const { fullname, profession } = props;
 
-  static defaultProps = {
-    name: "Nyla Khalil",
-    description: "Software Engineer",
-  };
-
-  render() {
-    const { name, description } = this.props;
-
-    return (
-      <Box sx={{ flexGrow: 1, p: 5 }}>
-        <Typography variant="h4">{name}</Typography>
-        <Typography variant="h6">{description}</Typography>
-        <MapView />
-      </Box>
-    );
-  }
+  return (
+    <Box sx={{ flexGrow: 1, p: 5 }}>
+      <Typography variant="h4">{fullname}</Typography>
+      <Typography variant="h6">{profession}</Typography>
+      <MapView />
+    </Box>
+  );
 }
