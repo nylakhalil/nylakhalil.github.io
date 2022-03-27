@@ -49,15 +49,19 @@
                 "value": "1"
             },
             {
+                "text": "JavaScript",
+                "value": "1"
+            },
+            {
+                "text": "Python",
+                "value": "1"
+            },
+            {
                 "text": "Angular",
                 "value": "1"
             },
             {
                 "text": "React",
-                "value": "1"
-            },
-            {
-                "text": "Python",
                 "value": "1"
             },
             {
@@ -82,10 +86,6 @@
             },
             {
                 "text": "JSON",
-                "value": "1"
-            },
-            {
-                "text": "XML",
                 "value": "1"
             },
             {
@@ -153,6 +153,18 @@
         },
         {
             "text": "DevOps",
+            "value": "1"
+        },
+        {
+            "text": "Linux",
+            "value": "1"
+        },
+        {
+            "text": "Docker",
+            "value": "1"
+        },
+        {
+            "text": "Kubernetes",
             "value": "1"
         },
         {
