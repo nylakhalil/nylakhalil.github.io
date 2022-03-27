@@ -19,6 +19,7 @@ body {
 #main {
   height: 100%;
   width: auto;
+  overflow-y: auto;
 }
 
 .leaflet-container {

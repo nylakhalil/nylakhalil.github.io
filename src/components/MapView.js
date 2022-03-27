@@ -4,6 +4,7 @@ import { Map, LayersControl, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 
 import GeoIP from "./GeoIP";
+import { MAP_JSON_ENDPOINT, GEOIP_ENDPOINT } from "../config/AppConfig";
 
 import "leaflet/dist/leaflet.css";
 
@@ -54,19 +55,21 @@ export default class MapView extends Component {
   }
 
   componentDidMount() {
-    fetch(process.env.REACT_APP_MAP_JSON)
+    fetch(MAP_JSON_ENDPOINT)
       .then((response) => {
         return response.json();
       })
       .then((data) => this.setState({ data: data }))
       .catch((error) => console.error("Map Config Error: ", error));
 
-    fetch(process.env.REACT_APP_GEOIP_ENDPOINT)
+    if (process.env.NODE_ENV === 'production') {
+      fetch(GEOIP_ENDPOINT)
       .then((response) => {
         return response.json();
       })
       .then((data) => this.parseLocation(data))
       .catch((error) => console.error("Location Data Error: ", error));
+    }
   }
 
   getBaselayers(layer) {

@@ -20,7 +20,7 @@ function Copyright() {
 }
 
 function Links() {
-  function handleClick(title: String) {
+  function handleClick(title: string) {
     ReactGA.event({
       category: "Site Footer",
       action: "Selected Social Icon: " + title,
