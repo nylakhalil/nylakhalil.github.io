@@ -5,9 +5,13 @@ test("renders app home", () => {
   render(<App />);
 
   const nameAnchorNode = screen.getByText(/nyla khalil/i, { selector: "h4" });
-  const aboutAnchorNode = screen.getByText(/about/i);
-  const developAnchorNode = screen.getByText(/develop/i);
-  const photographyAnchorNode = screen.getByText(/photography/i);
+  const aboutAnchorNode = screen.getByText(/about/i, { selector: "button" });
+  const developAnchorNode = screen.getByText(/develop/i, {
+    selector: "button",
+  });
+  const photographyAnchorNode = screen.getByText(/photography/i, {
+    selector: "button",
+  });
 
   expect(nameAnchorNode).toBeInTheDocument();
   expect(aboutAnchorNode).toBeInTheDocument();
