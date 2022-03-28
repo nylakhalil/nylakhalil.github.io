@@ -25,6 +25,9 @@ const pages = [
  */
 export default function Header() {
   const history = useHistory();
+  const [currentPage, setCurrentPage] = useState<string>(
+    history.location.pathname
+  );
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -38,7 +41,10 @@ export default function Header() {
   const handleRouteChange = (event: SyntheticEvent) => {
     setAnchorElNav(null);
     const page = pages.find((p) => p.name === event.currentTarget.textContent);
-    if (page?.location) history.push(page.location);
+    if (page?.location) {
+      setCurrentPage(page.location);
+      history.push(page.location);
+    }
   };
 
   return (
@@ -53,7 +59,7 @@ export default function Header() {
           {pages.map((page: any) => (
             <Button
               key={page.name}
-              color="inherit"
+              color={page.location === currentPage ? "primary" : "inherit"}
               sx={{ mr: "10px" }}
               onClick={handleRouteChange}
             >
