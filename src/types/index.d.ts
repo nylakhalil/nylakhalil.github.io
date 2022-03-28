@@ -34,6 +34,29 @@ export interface PhotoInfo {
   url: string;
 }
 
+export interface MapLayerInfo {
+  id: string;
+  on: string;
+  name: string;
+  url: string;
+  attribution: string;
+}
+
+export interface MapMarkerInfo {
+  id: string;
+  icon: string;
+  color: string;
+  position: L.LatLngExpression;
+  text: string;
+}
+
+export interface MapInfo {
+  zoom: number;
+  center: Array;
+  baselayers: Array<MapLayerInfo>;
+  markers: Array<MapMarkerInfo>;
+}
+
 export interface GeoIpProps {
   lat: number;
   lon: number;

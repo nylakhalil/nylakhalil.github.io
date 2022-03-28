@@ -21,7 +21,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 export const withTracker = (WrappedComponent, injectedProps) => {
-
   const trackPage = (page) => {
     ReactGA.set({ page, ...{} });
     ReactGA.pageview(page);
@@ -33,7 +32,7 @@ export const withTracker = (WrappedComponent, injectedProps) => {
       [props.location.pathname]
     );
 
-    const newProps = {...props, ...injectedProps};
+    const newProps = { ...props, ...injectedProps };
     return <WrappedComponent {...newProps} />;
   };
 

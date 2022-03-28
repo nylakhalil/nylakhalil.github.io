@@ -13,8 +13,8 @@ import { Button } from "@mui/material";
 
 const pages = [
   { name: "About", location: "/" },
-  { name: "Development", location: "/development"},
-  { name: "Photography", location: "/photography" }
+  { name: "Development", location: "/development" },
+  { name: "Photography", location: "/photography" },
 ];
 
 /**
@@ -37,8 +37,8 @@ export default function Header() {
 
   const handleRouteChange = (event: SyntheticEvent) => {
     setAnchorElNav(null);
-    const page = pages.find(p => p.name === event.currentTarget.textContent);
-    if (page?.location) history.push(page.location)
+    const page = pages.find((p) => p.name === event.currentTarget.textContent);
+    if (page?.location) history.push(page.location);
   };
 
   return (
@@ -49,14 +49,19 @@ export default function Header() {
           component="div"
           sx={{ flexGrow: 1 }}
         ></Typography>
-         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-         {pages.map((page: any) => (
-           <Button key={page.name} color="inherit" sx={{ mr: "10px" }} onClick={handleRouteChange}>
-            {page.name}
-          </Button>
-         ))}
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          {pages.map((page: any) => (
+            <Button
+              key={page.name}
+              color="inherit"
+              sx={{ mr: "10px" }}
+              onClick={handleRouteChange}
+            >
+              {page.name}
+            </Button>
+          ))}
         </Box>
-        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+        <Box sx={{ display: { xs: "flex", md: "none" } }}>
           <IconButton
             size="large"
             aria-label="menu"
@@ -71,18 +76,18 @@ export default function Header() {
             id="menu-appbar"
             anchorEl={anchorElNav}
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
+              vertical: "bottom",
+              horizontal: "left",
             }}
             keepMounted
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
+              vertical: "top",
+              horizontal: "left",
             }}
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}
             sx={{
-              display: { xs: 'block', md: 'none' },
+              display: { xs: "block", md: "none" },
             }}
           >
             {pages.map((page) => (

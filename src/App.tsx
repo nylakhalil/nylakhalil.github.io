@@ -35,15 +35,22 @@ function NoMatch(): JSX.Element {
 }
 
 export default function App(): JSX.Element {
-  const homeProps: HomeViewProps = { fullname: "Nyla Khalil", profession: "Software Engineer" };
-  
+  const homeProps: HomeViewProps = {
+    fullname: "Nyla Khalil",
+    profession: "Software Engineer",
+  };
+
   return (
     <div id="app">
       <HashRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <main id="main">
           <Switch>
-            <Route exact path="/" component={withTracker(HomeView, homeProps)} />
+            <Route
+              exact
+              path="/"
+              component={withTracker(HomeView, homeProps)}
+            />
             <Route path="/development" component={withTracker(CodeView)} />
             <Route path="/photography" component={withTracker(PhotoView)} />
             <Route path="*" component={NoMatch} />

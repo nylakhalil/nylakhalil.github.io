@@ -3,7 +3,7 @@ import { GEOIP_ENDPOINT } from "../config/AppConfig";
 
 /**
  * JSX Element to display IP address and geo location information.
- * 
+ *
  * @function GeoIP
  * @property {number} lat - Latitude (defaults to 0)
  * @property {number} lon - Longtitude (defaults to 0)
@@ -15,7 +15,7 @@ import { GEOIP_ENDPOINT } from "../config/AppConfig";
  * @version 2.0.0
  * @author Nyla Khalil
  */
- export default function GeoIP(props: GeoIpProps): JSX.Element {
+export default function GeoIP(props: GeoIpProps): JSX.Element {
   const coordinates = JSON.stringify([props.lat, props.lon]);
 
   return (

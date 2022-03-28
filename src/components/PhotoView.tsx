@@ -109,8 +109,8 @@ export default function PhotoView() {
           steps={maxSteps}
           position="static"
           activeStep={activeStep}
-          backButton={<Button sx={{ display: 'none' }}/>}
-          nextButton={<Button sx={{ display: 'none' }}/>}
+          backButton={<Button sx={{ display: "none" }} />}
+          nextButton={<Button sx={{ display: "none" }} />}
           sx={{
             p: 0,
             m: 0,

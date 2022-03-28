@@ -52,7 +52,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -b master -d build",
     "serve": "npm run build && ./node_modules/serve/bin/serve.js -s build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {

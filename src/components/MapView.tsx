@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import { Map, LayersControl, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
@@ -7,8 +7,9 @@ import GeoIP from "./GeoIP";
 import { MAP_JSON_ENDPOINT, GEOIP_ENDPOINT } from "../config/AppConfig";
 
 import "leaflet/dist/leaflet.css";
+import { GeoIpProps, MapInfo, MapLayerInfo, MapMarkerInfo } from "../types";
 
-const initMarker = (ref) => {
+const initMarker = (ref: any) => {
   if (ref) {
     ref.leafletElement.openPopup();
   }
@@ -17,62 +18,50 @@ const initMarker = (ref) => {
 /**
  * Map View Component configured via JSON
  *
- * @version 1.0.0
+ * @version 2.0.0
  * @author Nyla Khalil
  */
-export default class MapView extends Component {
-  constructor(props) {
-    super(props);
+export default function MapView() {
+  const [popupMsg, setPopupMsg] = useState<string>("");
+  const [latLng, setLatLng] = useState<L.LatLngExpression | null>(null);
+  const [geoIP, setGeoIP] = useState<GeoIpProps | null>(null);
+  const [mapInfo, setMapInfo] = useState<MapInfo>({
+    zoom: 14,
+    center: [38.889931, -77.009003],
+    baselayers: [],
+    markers: [],
+  });
 
-    this.state = {
-      data: {
-        zoom: 14,
-        center: [38.889931, -77.009003],
-        baselayers: [],
-        markers: [],
-      },
-      latlng: null,
-      popupMsg: "",
-      location: {
-        latitude: null,
-        longitude: null,
-        city: null,
-        region: null,
-        country_name: null,
-        ip: null,
-        org: null,
-      },
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  parseLocation(data) {
-    if (data) {
-      this.setState({
-        location: data,
-      });
-    }
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     fetch(MAP_JSON_ENDPOINT)
       .then((response) => {
         return response.json();
       })
-      .then((data) => this.setState({ data: data }))
+      .then((data) => setMapInfo(data))
       .catch((error) => console.error("Map Config Error: ", error));
 
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === "production") {
       fetch(GEOIP_ENDPOINT)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => this.parseLocation(data))
-      .catch((error) => console.error("Location Data Error: ", error));
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          const geoProps: GeoIpProps = {
+            lat: data.latitude,
+            lon: data.longitude,
+            city: data.city,
+            region: data.region,
+            country: data.country,
+            ip: data.ip,
+            isp: data.org,
+          };
+          setGeoIP(geoProps);
+        })
+        .catch((error) => console.error("Location Data Error: ", error));
     }
-  }
+  }, []);
 
-  getBaselayers(layer) {
+  function getBaselayers(layer: MapLayerInfo) {
     if (layer) {
       return (
         <LayersControl.BaseLayer
@@ -86,7 +75,7 @@ export default class MapView extends Component {
     }
   }
 
-  getMarkerIcon(iconName, iconColor) {
+  function getMarkerIcon(iconName: string, iconColor: string) {
     let htmlText = '<i class="fa fa-NAME fa-lg" style="color: COLOR;" />';
     htmlText = htmlText.replace(/COLOR/g, iconColor);
     htmlText = htmlText.replace(/NAME/g, iconName);
@@ -95,14 +84,13 @@ export default class MapView extends Component {
       className: "div-icon",
       html: htmlText,
       iconAnchor: [0, 0],
-      iconSize: null,
       popupAnchor: [0, 0],
     });
   }
 
-  getMarkers(marker) {
+  function getMarkers(marker: MapMarkerInfo) {
     if (marker) {
-      let icon = this.getMarkerIcon(marker.icon, marker.color);
+      const icon = getMarkerIcon(marker.icon, marker.color);
       return (
         <Marker key={marker.id} position={marker.position} icon={icon}>
           <Popup>{marker.text}</Popup>
@@ -111,9 +99,15 @@ export default class MapView extends Component {
     }
   }
 
-  handleClick(e) {
-    const location = this.parseLatLng(e.latlng);
-    this.setState({ latlng: e.latlng, popupMsg: location });
+  function handleMapClick(event: any) {
+    const location = event.latlng
+      ? "Lat Lon: " +
+        event.latlng["lat"].toFixed(5) +
+        ", " +
+        event.latlng["lng"].toFixed(5)
+      : "Marker Location Error";
+    setLatLng(event.latlng);
+    setPopupMsg(location);
 
     ReactGA.event({
       category: "Map Page",
@@ -122,70 +116,49 @@ export default class MapView extends Component {
     });
   }
 
-  parseLatLng(latlng) {
-    if (!latlng) {
-      return "Marker Location Error";
-    }
+  const mapCenter: L.LatLngExpression =
+    geoIP && geoIP.lat && geoIP.lon ? [geoIP.lat, geoIP.lon] : mapInfo.center;
 
-    const lat = latlng["lat"].toFixed(5);
-    const lng = latlng["lng"].toFixed(5);
-    return "Lat Lon: " + lat + ", " + lng;
-  }
+  return (
+    <Map center={mapCenter} zoom={mapInfo.zoom} onClick={handleMapClick}>
+      <LayersControl position="topright">
+        {mapInfo.baselayers.map((layer: MapLayerInfo) => getBaselayers(layer))}
+      </LayersControl>
 
-  render() {
-    let coordinates = null;
-    if (this.state.location.latitude && this.state.location.longitude) {
-      coordinates = [
-        this.state.location.latitude,
-        this.state.location.longitude,
-      ];
-    }
+      {mapInfo.markers.map((marker: MapMarkerInfo) => getMarkers(marker))}
 
-    const mapCenter = coordinates ? coordinates : this.state.data.center;
+      {latLng && (
+        <Marker
+          position={latLng}
+          icon={getMarkerIcon("map-marker", "limegreen")}
+          draggable={true}
+        >
+          <Popup>{popupMsg}</Popup>
+        </Marker>
+      )}
 
-    return (
-      <Map
-        center={mapCenter}
-        zoom={this.state.data.zoom}
-        onClick={this.handleClick}
-      >
-        <LayersControl position="topright">
-          {this.state.data.baselayers.map((layer) => this.getBaselayers(layer))}
-        </LayersControl>
-
-        {this.state.data.markers.map((marker) => this.getMarkers(marker))}
-
-        {this.state.latlng && (
-          <Marker
-            position={this.state.latlng}
-            icon={this.getMarkerIcon("map-marker", "limegreen")}
-            draggable={true}
-          >
-            <Popup>{this.state.popupMsg}</Popup>
-          </Marker>
-        )}
-
-        {coordinates && (
-          <Marker
-            position={coordinates}
-            ref={initMarker}
-            icon={this.getMarkerIcon("location-arrow", "tomato")}
-            draggable={false}
-          >
+      {mapCenter && (
+        <Marker
+          position={mapCenter}
+          ref={initMarker}
+          icon={getMarkerIcon("location-arrow", "tomato")}
+          draggable={false}
+        >
+          {geoIP && (
             <Popup>
               <GeoIP
-                lat={this.state.location.latitude}
-                lon={this.state.location.longitude}
-                city={this.state.location.city}
-                region={this.state.location.region}
-                country={this.state.location.country_name}
-                ip={this.state.location.ip}
-                isp={this.state.location.org}
+                lat={geoIP.lat}
+                lon={geoIP.lon}
+                city={geoIP.city}
+                region={geoIP.region}
+                country={geoIP.country}
+                ip={geoIP.ip}
+                isp={geoIP.isp}
               />
             </Popup>
-          </Marker>
-        )}
-      </Map>
-    );
-  }
+          )}
+        </Marker>
+      )}
+    </Map>
+  );
 }

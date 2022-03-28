@@ -15,7 +15,11 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { DEVELOP_JSON_ENDPOINT } from "../config/AppConfig";
-import { CodeViewResponse, DescriptionCardProps, WordCloudCardProps } from "../types";
+import {
+  CodeViewResponse,
+  DescriptionCardProps,
+  WordCloudCardProps,
+} from "../types";
 
 const DescriptionCard = (props: DescriptionCardProps) => {
   const { title, description, link } = props;
@@ -85,7 +89,7 @@ export default function CodeView() {
     rotationAngles: [0, 90],
     scale: "sqrt",
     spiral: "archimedean",
-    transitionDuration: 1000
+    transitionDuration: 1000,
   });
 
   useEffect(() => {
@@ -107,7 +111,7 @@ export default function CodeView() {
 
   const handleChange = (event: SyntheticEvent, newTabIndex: number) => {
     setTabIndex(newTabIndex);
-    setStageTitle(event.currentTarget.textContent || 'design');
+    setStageTitle(event.currentTarget.textContent || "design");
     ReactGA.event({
       category: "Develop Page",
       action: "Selected Icon: " + stageTitle,
@@ -125,11 +129,7 @@ export default function CodeView() {
         flexDirection: "column",
       }}
     >
-      <Tabs
-        value={tabIndex}
-        onChange={handleChange}
-        aria-label="Stages"
-      >
+      <Tabs value={tabIndex} onChange={handleChange} aria-label="Stages">
         <Tab icon={<FontAwesomeIcon icon={faPalette} />} label="design" />
         <Tab icon={<FontAwesomeIcon icon={faCode} />} label="develop" />
         <Tab icon={<FontAwesomeIcon icon={faShieldAlt} />} label="test" />
