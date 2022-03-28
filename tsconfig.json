@@ -20,7 +20,15 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+  "files": [
+    "types/index.d.ts",
+    "types/react-app-env.d.ts"
+  ],
   "include": [
-    "src"
+    "src/"
+  ],
+  "exclude": [
+    "node_modules", 
+    "build"
   ]
 }

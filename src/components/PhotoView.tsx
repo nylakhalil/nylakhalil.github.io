@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import MobileStepper from "@mui/material/MobileStepper";
@@ -7,6 +7,8 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import ReactGA from "react-ga";
 import SwipeableViews from "react-swipeable-views";
 import theme from "../theme";
+import { PhotoInfo } from "../types";
+import { PHOTOS_JSON_ENDPOINT } from "../config/AppConfig";
 
 /**
  * Carousel Component to render images specified in JSON file.
@@ -15,16 +17,15 @@ import theme from "../theme";
  * @author Nyla Khalil
  */
 export default function PhotoView() {
-  const [activeStep, setActiveStep] = useState(0);
-  const [maxSteps, setMaxSteps] = useState(0);
-  const [images, setImages] = useState([]);
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [maxSteps, setMaxSteps] = useState<number>(0);
+  const [images, setImages] = useState<Array<PhotoInfo> | null>(null);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_PHOTOS_JSON)
+    fetch(PHOTOS_JSON_ENDPOINT)
       .then((res) => res.json())
       .then((result) => {
         setImages(result);
-        console.log(result.length);
         setMaxSteps(result.length);
       })
       .catch((error) => console.error("Error: ", error));
@@ -34,7 +35,7 @@ export default function PhotoView() {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const handleBack = (event) => {
+  const handleBack = (event: SyntheticEvent) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
     console.log(event.currentTarget.textContent);
     ReactGA.event({
@@ -43,6 +44,10 @@ export default function PhotoView() {
       label: "Navigation",
     });
   };
+
+  if (!images || Object.keys(images).length === 0) {
+    return null;
+  }
 
   return (
     <Box
@@ -70,7 +75,7 @@ export default function PhotoView() {
         }}
       >
         <SwipeableViews index={activeStep} enableMouseEvents>
-          {images.map((image, index) => (
+          {images.map((image: PhotoInfo, index: number) => (
             <Box
               key={"img-parent-" + index}
               sx={{
@@ -104,6 +109,8 @@ export default function PhotoView() {
           steps={maxSteps}
           position="static"
           activeStep={activeStep}
+          backButton={<Button sx={{ display: "none" }} />}
+          nextButton={<Button sx={{ display: "none" }} />}
           sx={{
             p: 0,
             m: 0,

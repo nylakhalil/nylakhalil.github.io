@@ -11,6 +11,7 @@ import PhotoView from "./components/PhotoView";
 
 import "./App.css";
 import { Box, Typography } from "@mui/material";
+import { HomeViewProps } from "./types";
 
 library.add(faLocationArrow);
 library.add(faMapPin);
@@ -34,20 +35,29 @@ function NoMatch(): JSX.Element {
 }
 
 export default function App(): JSX.Element {
+  const homeProps: HomeViewProps = {
+    fullname: "Nyla Khalil",
+    profession: "Software Engineer",
+  };
+
   return (
     <div id="app">
-      <Header />
-      <main id="main" className="flex-grow-1">
-        <HashRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter basename={process.env.PUBLIC_URL}>
+        <Header />
+        <main id="main">
           <Switch>
-            <Route exact path="/" component={withTracker(HomeView)} />
+            <Route
+              exact
+              path="/"
+              component={withTracker(HomeView, homeProps)}
+            />
             <Route path="/development" component={withTracker(CodeView)} />
             <Route path="/photography" component={withTracker(PhotoView)} />
             <Route path="*" component={NoMatch} />
           </Switch>
-        </HashRouter>
-      </main>
-      <Footer />
+        </main>
+        <Footer />
+      </HashRouter>
     </div>
   );
 }
