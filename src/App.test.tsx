@@ -5,7 +5,7 @@ test("renders app home", () => {
   render(<App />);
 
   const nameAnchorNode = screen.getByText(/nyla khalil/i, { selector: "h4" });
-  const aboutAnchorNode = screen.getByText(/about/i, { selector: "button" });
+  const aboutAnchorNode = screen.getByText(/home/i, { selector: "button" });
   const developAnchorNode = screen.getByText(/develop/i, {
     selector: "button",
   });
