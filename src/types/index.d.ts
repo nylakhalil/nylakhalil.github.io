@@ -1,4 +1,5 @@
 import { OptionsProp, Word } from "react-wordcloud";
+import { DivIcon, Map } from "leaflet";
 
 export interface HomeViewProps {
   fullname: string;
@@ -65,4 +66,10 @@ export interface GeoIpProps {
   country: string;
   ip: string;
   isp: string;
+}
+
+export interface GeoIpMarkerProps {
+  icon: DivIcon;
+  geoIP: GeoIpProps;
+  map: Map | null;
 }

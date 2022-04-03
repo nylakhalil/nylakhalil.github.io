@@ -1,18 +1,64 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactGA from "react-ga";
-import { Map, LayersControl, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
+import { divIcon, DivIcon, Map as LeafletMap } from "leaflet";
+import {
+  MapContainer,
+  LayersControl,
+  TileLayer,
+  Marker,
+  Popup,
+} from "react-leaflet";
 
 import GeoIP from "./GeoIP";
 import { MAP_JSON_ENDPOINT, GEOIP_ENDPOINT } from "../config/AppConfig";
 
 import "leaflet/dist/leaflet.css";
-import { GeoIpProps, MapInfo, MapLayerInfo, MapMarkerInfo } from "../types";
+import {
+  GeoIpMarkerProps,
+  GeoIpProps,
+  MapInfo,
+  MapLayerInfo,
+  MapMarkerInfo,
+} from "../types";
 
-const initMarker = (ref: any) => {
-  if (ref) {
-    ref.leafletElement.openPopup();
-  }
+const GeoIpMarker = (props: GeoIpMarkerProps) => {
+  const { icon, geoIP, map } = props;
+  const popupRef = useRef<any | null>(null);
+  const [refReady, setRefReady] = useState(false);
+  map?.flyTo([geoIP.lat, geoIP.lon]);
+
+  ReactGA.event({
+    category: "Map Page",
+    action: "Map loaded",
+    label: "Geolocation",
+  });
+
+  useEffect(() => {
+    if (popupRef.current) {
+      popupRef.current._source.openPopup();
+    }
+  }, [refReady]);
+
+  return geoIP.lat === null ? null : (
+    <Marker draggable={false} position={[geoIP.lat, geoIP.lon]} icon={icon}>
+      <Popup
+        ref={(ref) => {
+          popupRef.current = ref as any;
+          setRefReady(true);
+        }}
+      >
+        <GeoIP
+          lat={geoIP.lat}
+          lon={geoIP.lon}
+          city={geoIP.city}
+          region={geoIP.region}
+          country={geoIP.country}
+          ip={geoIP.ip}
+          isp={geoIP.isp}
+        />
+      </Popup>
+    </Marker>
+  );
 };
 
 /**
@@ -22,9 +68,8 @@ const initMarker = (ref: any) => {
  * @author Nyla Khalil
  */
 export default function MapView() {
-  const [popupMsg, setPopupMsg] = useState<string>("");
-  const [latLng, setLatLng] = useState<L.LatLngExpression | null>(null);
   const [geoIP, setGeoIP] = useState<GeoIpProps | null>(null);
+  const [map, setMap] = useState<LeafletMap | null>(null);
   const [mapInfo, setMapInfo] = useState<MapInfo>({
     zoom: 14,
     center: [38.889931, -77.009003],
@@ -37,7 +82,9 @@ export default function MapView() {
       .then((response) => {
         return response.json();
       })
-      .then((data) => setMapInfo(data))
+      .then((data) => {
+        setMapInfo(data);
+      })
       .catch((error) => console.error("Map Config Error: ", error));
 
     if (process.env.NODE_ENV === "production") {
@@ -75,12 +122,12 @@ export default function MapView() {
     }
   }
 
-  function getMarkerIcon(iconName: string, iconColor: string) {
+  function getMarkerIcon(iconName: string, iconColor: string): DivIcon {
     let htmlText = '<i class="fa fa-NAME fa-lg" style="color: COLOR;" />';
     htmlText = htmlText.replace(/COLOR/g, iconColor);
     htmlText = htmlText.replace(/NAME/g, iconName);
 
-    return L.divIcon({
+    return divIcon({
       className: "div-icon",
       html: htmlText,
       iconAnchor: [0, 0],
@@ -99,66 +146,30 @@ export default function MapView() {
     }
   }
 
-  function handleMapClick(event: any) {
-    const location = event.latlng
-      ? "Lat Lon: " +
-        event.latlng["lat"].toFixed(5) +
-        ", " +
-        event.latlng["lng"].toFixed(5)
-      : "Marker Location Error";
-    setLatLng(event.latlng);
-    setPopupMsg(location);
-
-    ReactGA.event({
-      category: "Map Page",
-      action: "Selected Marker Location",
-      label: "Interaction",
-    });
-  }
-
   const mapCenter: L.LatLngExpression =
     geoIP && geoIP.lat && geoIP.lon ? [geoIP.lat, geoIP.lon] : mapInfo.center;
 
   return (
-    <Map center={mapCenter} zoom={mapInfo.zoom} onClick={handleMapClick}>
+    <MapContainer
+      center={mapCenter}
+      zoom={mapInfo.zoom}
+      whenCreated={(m: LeafletMap) => {
+        setMap(m);
+      }}
+    >
       <LayersControl position="topright">
         {mapInfo.baselayers.map((layer: MapLayerInfo) => getBaselayers(layer))}
       </LayersControl>
 
       {mapInfo.markers.map((marker: MapMarkerInfo) => getMarkers(marker))}
 
-      {latLng && (
-        <Marker
-          position={latLng}
-          icon={getMarkerIcon("map-marker", "limegreen")}
-          draggable={true}
-        >
-          <Popup>{popupMsg}</Popup>
-        </Marker>
-      )}
-
-      {mapCenter && (
-        <Marker
-          position={mapCenter}
-          ref={initMarker}
+      {mapCenter && geoIP && (
+        <GeoIpMarker
+          map={map}
+          geoIP={geoIP}
           icon={getMarkerIcon("location-arrow", "tomato")}
-          draggable={false}
-        >
-          {geoIP && (
-            <Popup>
-              <GeoIP
-                lat={geoIP.lat}
-                lon={geoIP.lon}
-                city={geoIP.city}
-                region={geoIP.region}
-                country={geoIP.country}
-                ip={geoIP.ip}
-                isp={geoIP.isp}
-              />
-            </Popup>
-          )}
-        </Marker>
+        />
       )}
-    </Map>
+    </MapContainer>
   );
 }
