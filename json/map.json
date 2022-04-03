@@ -24,13 +24,6 @@
             "color": "Dodgerblue",
             "position": [38.889931, -77.009003],
             "text": "Washington, D.C."
-        },
-        {
-            "id": "reston-center",
-            "icon": "map-pin",
-            "color": "Dodgerblue",
-            "position": [38.955144, -77.355550],
-            "text": "Reston"
         }
     ]
 
