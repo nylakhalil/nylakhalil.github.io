@@ -1,5 +1,5 @@
-import { GeoIpProps } from "../types";
-import { GEOIP_ENDPOINT } from "../config/AppConfig";
+import { GeoIpProps } from "../../types";
+import { GEOIP_ENDPOINT } from "../../config/AppConfig";
 
 /**
  * JSX Element to display IP address and geo location information.

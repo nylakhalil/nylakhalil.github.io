@@ -3,11 +3,11 @@ import { library, dom } from "@fortawesome/fontawesome-svg-core";
 import { faMapPin, faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 
 import { withTracker } from "./withTracker";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import HomeView from "./components/HomeView";
-import CodeView from "./components/CodeView";
-import PhotoView from "./components/PhotoView";
+import Header from "./components/Common/Header";
+import Footer from "./components/Common/Footer";
+import HomeView from "./components/Home/HomeView";
+import CodeView from "./components/Code/CodeView";
+import PhotoView from "./components/Photo/PhotoView";
 
 import "./App.css";
 import { Box, Typography } from "@mui/material";

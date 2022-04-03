@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { HomeViewProps } from "../types";
-import MapView from "./MapView";
+import { HomeViewProps } from "../../types";
+import MapView from "../Map/MapView";
 
 /**
  * About View Component with description and {@link MapView}

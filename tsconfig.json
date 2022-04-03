@@ -21,8 +21,8 @@
     "jsx": "react-jsx"
   },
   "files": [
-    "types/index.d.ts",
-    "types/react-app-env.d.ts"
+    "src/types/index.d.ts",
+    "src/types/react-app-env.d.ts"
   ],
   "include": [
     "src/"

@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import ReactGA from "react-ga";
 import SwipeableViews from "react-swipeable-views";
-import theme from "../theme";
-import { PhotoInfo } from "../types";
-import { PHOTOS_JSON_ENDPOINT } from "../config/AppConfig";
+import theme from "../../theme";
+import { PhotoInfo } from "../../types";
+import { PHOTOS_JSON_ENDPOINT } from "../../config/AppConfig";
 
 /**
  * Carousel Component to render images specified in JSON file.

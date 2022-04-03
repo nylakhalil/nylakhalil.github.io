@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
 
 const pages = [
-  { name: "About", location: "/" },
+  { name: "Home", location: "/" },
   { name: "Development", location: "/development" },
   { name: "Photography", location: "/photography" },
 ];

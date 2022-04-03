@@ -14,12 +14,12 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { DEVELOP_JSON_ENDPOINT } from "../config/AppConfig";
+import { DEVELOP_JSON_ENDPOINT } from "../../config/AppConfig";
 import {
   CodeViewResponse,
   DescriptionCardProps,
   WordCloudCardProps,
-} from "../types";
+} from "../../types";
 
 const DescriptionCard = (props: DescriptionCardProps) => {
   const { title, description, link } = props;
