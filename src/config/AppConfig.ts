@@ -6,4 +6,6 @@ export const DEVELOP_JSON_ENDPOINT =
   process.env.REACT_APP_DEVELOP_JSON || "/json/words.json";
 export const PHOTOS_JSON_ENDPOINT =
   process.env.REACT_APP_PHOTOS_JSON || "/json/photos.json";
+export const BLOG_JSON_ENDPOINT =
+  process.env.REACT_APP_BLOG_JSON || "/json/blog.json";
 export const GEOIP_ENDPOINT = process.env.REACT_APP_GEOIP_ENDPOINT || "";
