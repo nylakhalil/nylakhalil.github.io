@@ -47,3 +47,7 @@ body {
   height: 60%;
   width: 60%;
 }
+
+.link-decoration {
+  text-decoration: none;
+}

@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  react-ui:
+    container_name: react-ui
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      PORT_NUMBER: 3000
+      JSON_ENDPOINT: /json
+      REACT_APP_MAP_JSON: $JSON_ENDPOINT/map.json
+      REACT_APP_DEVELOP_JSON: $JSON_ENDPOINT/words.json
+      REACT_APP_PHOTOS_JSON: $JSON_ENDPOINT/photos.json
+      REACT_APP_GA_CODE: ''
+      REACT_APP_GEOIP_ENDPOINT: https://ipapi.co/json
+    volumes:
+      - .:/app/
+    ports:
+      - 3000:3000

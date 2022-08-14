@@ -73,3 +73,11 @@ export interface GeoIpMarkerProps {
   geoIP: GeoIpProps;
   map: Map | null;
 }
+
+export interface BlogPostInfo {
+  id: string;
+  date: string;
+  title: string;
+  body: string;
+  tags: Array<string>;
+}

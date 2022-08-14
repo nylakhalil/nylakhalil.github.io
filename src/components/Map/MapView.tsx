@@ -11,12 +11,7 @@ import {
 import { MAP_JSON_ENDPOINT, GEOIP_ENDPOINT } from "../../config/AppConfig";
 
 import "leaflet/dist/leaflet.css";
-import {
-  GeoIpProps,
-  MapInfo,
-  MapLayerInfo,
-  MapMarkerInfo,
-} from "../../types";
+import { GeoIpProps, MapInfo, MapLayerInfo, MapMarkerInfo } from "../../types";
 import GeoIpMarker from "./GeoIpMarker";
 
 /**

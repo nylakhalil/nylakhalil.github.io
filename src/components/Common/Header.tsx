@@ -13,6 +13,7 @@ import { Button } from "@mui/material";
 
 const pages = [
   { name: "Home", location: "/" },
+  { name: "Blog", location: "/blog" },
   { name: "Development", location: "/development" },
   { name: "Photography", location: "/photography" },
 ];

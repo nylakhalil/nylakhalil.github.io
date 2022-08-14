@@ -31,6 +31,7 @@ function Links() {
   return (
     <Stack direction="row" spacing={2}>
       <Link
+        key="500px"
         href="https://500px.com/nyla"
         underline="none"
         onClick={() => {
@@ -40,6 +41,7 @@ function Links() {
         <FontAwesomeIcon icon={fa500px} color="black" />
       </Link>
       <Link
+        key="linkedin"
         href="https://www.linkedin.com/in/nylakhalil/"
         underline="none"
         onClick={() => {
@@ -49,6 +51,7 @@ function Links() {
         <FontAwesomeIcon icon={faLinkedin} color="black" />
       </Link>
       <Link
+        key="github"
         href="https://github.com/nylakhalil"
         underline="none"
         onClick={() => {
@@ -82,8 +85,8 @@ export default function Footer() {
           mr: "10px",
         }}
       >
-        <Links />
         <Copyright />
+        <Links />
       </Box>
     </footer>
   );
