@@ -1,0 +1,23 @@
+[
+  {
+    "id": 3,
+    "date": "August 14, 2022",
+    "title": "TensorFlow",
+    "body": "The <a href=\"https://github.com/nylakhalil/oggora\">oggora</a> GitHub repository has TensorFlow Object Detection and Segmentation samples using Docker Compose.</p><img src=\"https://raw.githubusercontent.com/nylakhalil/oggora/master/object_detection/output/pixel_detect.png\">",
+    "tags": ["CV", "ML"]
+   },
+   {
+    "id": 2,
+    "date": "August 13, 2022",
+    "title": "IP Geolocation",
+    "body": "The map on the home page attempts to display your location using your IP address. An IP address can disclose your geographic location down to the city level. Read more on <a href=\"https://en.wikipedia.org/wiki/Internet_geolocation\" class=\"link-decoration\">Wikipedia</a>.",
+    "tags": ["geolocation"]
+   },
+   {
+    "id": 1,
+    "date": "August 13, 2022",
+    "title": "Intro",
+    "body": "<p>A microblog built with <a href=\"https://reactjs.org/\" class=\"link-decoration\">React</a>, <a href=\"https://mui.com\" class=\"link-decoration\">MUI</a> and <span style='color: red'><i class='fa-solid fa-heart'></span></i>. A place to share and experiment.",
+    "tags": ["react", "mui"]
+  }
+]
